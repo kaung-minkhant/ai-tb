@@ -1,0 +1,23 @@
+.login-wrapper {
+}
+
+.login-inputs {
+  overflow: hidden;
+}
+
+.login-inputs .email-input {
+  /* background-color: #dde2e5; */
+}
+
+.login-buttons {
+  padding-top: 0.6rem;
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 650px) {
+  .login-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

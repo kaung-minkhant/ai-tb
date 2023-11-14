@@ -1,0 +1,36 @@
+.calendar {
+  --month-height: 162px;
+  --calendar-width: 300px;
+  border: 2px solid black;
+  border-radius: 1rem;
+  height: fit-content;
+  width: var(--calendar-width);
+}
+
+.calendar .MuiDateCalendar-root {
+  height: fit-content;
+  width: 300px;
+}
+
+.calendar .MuiPickersCalendarHeader-root {
+  justify-content: space-evenly;
+}
+
+.calendar .MuiPickersCalendarHeader-labelContainer {
+  margin-right: 0;
+}
+
+.calendar .MuiDayCalendar-weekDayLabel {
+  width: 30px;
+  height: 30px;
+}
+
+.calendar .MuiPickersDay-dayWithMargin {
+  width: 30px;
+  height: 30px;
+}
+
+.calendar .MuiDayCalendar-slideTransition {
+  min-height: var(--month-height)
+}
+

@@ -1,0 +1,36 @@
+.med-tracker {
+  --tracker-width: 200px;
+  border: 2px solid black;
+  border-radius: 1rem;
+  width: var(--tracker-width);
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.med-tracker .daily-med-info {
+  display: flex;
+  gap: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.med-tracker .med-taken {
+}
+
+.med-tracker .med-taken:hover {
+  box-shadow: none;
+}
+
+.med-tracker .view-med-calendar {
+  margin-top: 1rem;
+  width: 100%;
+  border-top: 2px solid black;
+  text-align: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 700;
+}

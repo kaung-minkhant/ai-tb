@@ -1,0 +1,70 @@
+.view-all-scans {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.view-all-scans h3 {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.view-all-scans .view-all-scans-items {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 650px) {
+  .view-all-scans .view-all-scans-items {
+    flex-direction: column;  
+    align-items: center;
+    flex-wrap: unset;
+  }
+}
+
+
+
+.view-scan {
+  --view-scan-width: 200px;
+  border: 1.5px solid black;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  width: var(--view-scan-width);
+  box-sizing: border-box;
+  /* margin-bottom: 1rem; */
+}
+
+.view-scan img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.view-scan .img-container {
+  width: 50%;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.view-scan .info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.view-scan .view-scan-btn {
+  cursor: pointer;
+  
+}

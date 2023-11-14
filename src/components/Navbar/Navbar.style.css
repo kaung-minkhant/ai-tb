@@ -1,0 +1,134 @@
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  z-index: 1;
+  background-color: white;
+  overflow-x: hidden;
+  border-right: 2px solid black;
+  transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar.mobile {
+  width: 0px;
+}
+
+.sidebar.mobile.show {
+  width: 170px;
+}
+
+.sidebar .navbar-profile {
+  border-bottom: 2px solid black;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+
+.sidebar .navbar-profile .profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sidebar .navbar-profile .profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: 1.5px solid black;
+  overflow: hidden;
+}
+
+.sidebar .navbar-profile .profile-name {
+  font-weight: 800;
+  font-size: 1.3rem;
+  text-wrap: nowrap;
+}
+
+.sidebar .sidebar-close {
+  margin-left: auto;
+}
+
+.sidebar .navbar-items {
+}
+
+.sidebar .navbar-item {
+  padding: 1rem 2rem;
+  text-align: center;
+  text-wrap: nowrap;
+  border-bottom: 1.5px solid black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar .navbar-item:hover {
+  font-weight: 800;
+}
+
+.sidebar .navbar-item.active {
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sidebar .navbar-logout {
+  border: none;
+  background-color: white;
+  border-top: 2px solid black;
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sidebar .navbar-logout:hover {
+  background-color: #e8e9eb;
+}
+
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 2px solid black;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  margin: 0;
+}
+
+.navbar .navbar-icon {
+  cursor: pointer;
+}
+
+/* @media (max-width: 920px) { */
+/*   .sidebar { */
+/*     width: 150px; */
+/*   } */
+/* } */
+
+@media (max-width: 650px) {
+  .sidebar .navbar-profile .profile {
+    align-items: center;
+    gap: 1rem;
+    font-weight: 800;
+    font-size: 1.3rem;
+  }
+  .sidebar .navbar-profile .profile-img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    border: 1.5px solid black;
+    overflow: hidden;
+  }
+  .sidebar .navbar-profile .profile-img {
+    font-weight: 800;
+    font-size: 1rem;
+  }
+}

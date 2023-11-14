@@ -1,0 +1,42 @@
+.test-records {
+  --test-records-width: 200px;
+  border: 2px solid black;
+  border-radius: 1rem;
+  width: var(--test-records-width);
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.test-records .test-records-header {
+  border-bottom: 2px solid black;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+.test-records .test-records-list {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.test-records .test-records-view-more {
+  width: 100%;
+  border-top: 2px solid black;
+  text-align: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 700;
+}

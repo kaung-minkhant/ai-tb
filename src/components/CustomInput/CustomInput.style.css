@@ -1,0 +1,75 @@
+.input-wrapper {
+  --input-width: 200px;
+  --input-font-size: 1rem;
+  padding: 0rem 1rem;
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.input-wrapper .icon-container {
+  width: calc(var(--input-font-size) + 0.5rem);
+  height: calc(var(--input-font-size) + 0.5rem);
+}
+
+.input-wrapper .input-container {
+  position: relative;
+  width: calc(var(--input-width) - 20px);
+  margin-left: 0.5rem;
+}
+
+
+.input-wrapper input {
+  font-size: var(--input-font-size);
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  padding-left: 0.3rem;
+  transition: transform 0.3s;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+}
+
+.input-wrapper .label {
+  position: absolute;
+  font-size: var(--input-font-size);
+  top: 3px;
+  left: 0;
+  padding-left: 0.3rem;
+  pointer-events: none;
+  transform-origin: left center;
+  transition: transform 0.3s;
+}
+
+.input-wrapper input:focus + .label,
+.input-wrapper input:not(:placeholder-shown) + .label{
+  transform: translateY(-80%) scale(0.75);
+}
+
+.input-wrapper input:focus,
+.input-wrapper input:not(:placeholder-shown) {
+  transform: translateY(25%);
+  padding-bottom: 0;
+  border: none;
+}
+
+.input-wrapper .status {
+  margin-left: 1rem;
+}
+
+.input-wrapper .error-card {
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  padding: 0.2rem 1rem;
+  border-radius: 0.5rem;
+  transform-origin: right top;
+  outline: 1px solid black;
+  text-wrap: nowrap;
+  font-size: 0.7rem;
+  background-color: #d4d6d5;
+}
