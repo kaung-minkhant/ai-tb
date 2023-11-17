@@ -8,6 +8,8 @@ import MainLayout, { MainLayoutLoader } from './layouts/MainLayout.component.jsx
 import DocterPage from './pages/DoctorPage/DocterPage.component.jsx'
 import ViewAllScans from './components/ViewAllScans/ViewAllScans.component.jsx'
 import AnalyticPage from './pages/Analytic/Analytic.component.jsx'
+
+import CallPage from "./pages/Call/CallPage.component.jsx";
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Tests from './components/Tests/Tests.component'
@@ -51,6 +53,16 @@ const router = createHashRouter([
       {
         index: true,
         element: <AnalyticPage />
+      }
+    ]
+  },
+  {
+    path: '/call',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <CallPage/>
       }
     ]
   },

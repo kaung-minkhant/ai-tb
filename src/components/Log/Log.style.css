@@ -1,0 +1,34 @@
+.log{
+    display: flex;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    padding: 10px 12px 10px 15px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.id {
+    font-size: 15px;
+    color: #6C6C6C;
+    margin-top: 2px
+}
+
+.name {
+    margin: 0;
+    font-weight: bold;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.time{
+    font-size: 15px;
+}
+
+.icon-container .icon {
+    display: flex;
+    max-width: 40px;
+}

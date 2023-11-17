@@ -14,12 +14,12 @@ const MainLayout = () => {
   const userId = useSelector(selectUserId)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!userId) {
-      deleteUserAccessToken()
-      navigate('/') 
-    }
-  }, [userId])
+  // useEffect(() => {
+  //   if (!userId) {
+  //     deleteUserAccessToken()
+  //     navigate('/') 
+  //   }
+  // }, [userId])
   return (
     <div className="main-layout">
       <Navbar/>
