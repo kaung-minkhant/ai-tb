@@ -15,10 +15,10 @@ const MainLayout = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!userId) {
-      deleteUserAccessToken()
-      navigate('/') 
-    }
+    // if (!userId) {
+    //   deleteUserAccessToken()
+    //   navigate('/') 
+    // }
   }, [userId])
   return (
     <div className="main-layout">

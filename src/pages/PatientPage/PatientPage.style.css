@@ -1,11 +1,23 @@
 .patient-page {
   display: flex;
-  /* display: grid; */
-  /* grid-template-columns: repeat(2, 1fr); */
-  /* flex-direction: column; */
-  /* align-items: center;  */
-  /* width: 50%; */
+  flex-direction: column;
   gap: 1rem;
+}
+
+.patient-page .patient-page-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.patient-page .patient-page-title {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.patient-page .patient-page-title h2 {
+  margin: 0;
 }
 
 .patient-page .patient-page-column {

@@ -51,6 +51,7 @@
 
 .sidebar .sidebar-close {
   margin-left: auto;
+  cursor: pointer;
 }
 
 .sidebar .navbar-items {
@@ -92,7 +93,7 @@
 
 
 .navbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
