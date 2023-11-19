@@ -20,6 +20,7 @@ const MainLayout = () => {
   //     navigate('/') 
   //   }
   // }, [userId])
+
   return (
     <div className="main-layout">
       <Navbar/>
