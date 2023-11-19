@@ -1,0 +1,56 @@
+.contact{
+    --ai-scan-width: 200px;
+    border: 2px solid black;
+    border-radius: 1rem;
+    overflow: hidden;
+    min-width: var(--min-width);
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.contact .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    margin: 0px 0 15px 0;
+}
+
+.contact .title .title-txt{
+    display: flex;
+    text-align: left;
+    font-size: 30px;
+    margin: 0;
+    flex: 1;
+}
+
+.contact .nav-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    margin: 0 0 20px 0
+}
+
+.btn-contact{
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    padding: 8px;
+    display: flex;
+    flex: 1;
+    justify-content: center;   
+}
+
+.logs{
+    max-height: 70vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
