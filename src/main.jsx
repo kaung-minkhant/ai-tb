@@ -9,10 +9,16 @@ import DocterPage from './pages/DoctorPage/DocterPage.component.jsx'
 import ViewAllScans from './components/ViewAllScans/ViewAllScans.component.jsx'
 import AnalyticPage from './pages/Analytic/Analytic.component.jsx'
 
-import CallPage from "./pages/Call/CallPage.component.jsx";
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Tests from './components/Tests/Tests.component'
+import PatientProfilePage from './pages/PatientProfile/PatientProfilePage.component'
+import DoctorProfile from './pages/DoctorProfile/DoctorProfile.component'
+import DoctorPatientsPage from './pages/DoctorPatientsPage/DoctorPatientsPage.component.jsx'
+import DoctorAppointments from './pages/DoctorAppointments/DoctorAppointments.component.jsx'
+import CallPage from './pages/Call/CallPage.component.jsx'
+import AiScanPage from './pages/AiScan/AiScanPage.component.jsx'
+import AiScan from './components/AiScan/AiScan.component.jsx'
 
 const router = createHashRouter([
   {
@@ -33,7 +39,11 @@ const router = createHashRouter([
       {
         path: 'allscans',
         element: <ViewAllScans width='300px' />,
-      }
+      },
+      {
+        path: 'profile',
+        element: <PatientProfilePage />
+      },
     ]
   },
   {
@@ -43,6 +53,30 @@ const router = createHashRouter([
       {
         index: true,
         element: <DocterPage />,
+      },
+      {
+        path: 'profile',
+        element: <DoctorProfile />
+      },
+      {
+        path: 'patients',
+        element: <DoctorPatientsPage />
+      },
+      {
+        path: 'appointments',
+        element: <DoctorAppointments />
+      },
+      {
+        path: 'calls',
+        element: <CallPage />
+      },
+      {
+        path: 'ai-scan',
+        element: <AiScanPage />,
+      },
+      {
+        path: 'scan',
+        element: <AiScan />
       }
     ]
   },
@@ -56,20 +90,6 @@ const router = createHashRouter([
       }
     ]
   },
-  {
-    path: '/call',
-    element: <MainLayout />,
-    children: [
-      {
-        index: true,
-        element: <CallPage/>
-      }
-    ]
-  },
-  {
-    path: '/codetests',
-    element: <Tests />
-  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

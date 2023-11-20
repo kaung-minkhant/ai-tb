@@ -1,0 +1,17 @@
+.patient-profile {
+}
+
+
+.patient-profile .patient-profile-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+
+.patient-profile .patient-profile-med-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

@@ -37,6 +37,7 @@ const WelcomePage = () => {
       })
     }
   }
+
   useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize) 

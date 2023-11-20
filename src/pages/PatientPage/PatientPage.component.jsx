@@ -17,7 +17,7 @@ const PatientPage = () => {
         <h2>Welcome, Phyo</h2>
       </div>
       <div>
-        <MedicineTracker width="300px" isMobile={isMobile} />
+        <MedicineTracker width="310px" isMobile={isMobile} />
         {
           !isMobile && (
             <Calendar width="300px" />
@@ -39,12 +39,6 @@ const PatientPage = () => {
         </PageOption>
       </div>
       <div className="patient-page-near-clinics"></div>
-      {/* <div className="patient-page-column"> */}
-      {/*   <AiScan width="300px" /> */}
-      {/*   <TestRecords width="300px" /> */}
-      {/* </div> */}
-      {/* <div className="patient-page-column"> */}
-      {/* </div> */}
     </div>
   )
 }

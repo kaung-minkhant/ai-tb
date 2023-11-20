@@ -1,0 +1,21 @@
+.doctor-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.doctor-page .doctor-page-title {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.doctor-page .doctor-page-title h2 {
+  margin: 0;
+}
+
+.doctor-page .doctor-page-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  gap: 1rem;
+}

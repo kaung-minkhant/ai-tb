@@ -1,6 +1,7 @@
 .patient-page {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -12,8 +13,10 @@
 }
 
 .patient-page .patient-page-title {
+  width: 100%;
   font-weight: 800;
   font-size: 1.5rem;
+  text-align: left;
 }
 
 .patient-page .patient-page-title h2 {

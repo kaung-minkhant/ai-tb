@@ -1,0 +1,18 @@
+.info-box {
+  border: 2px solid black;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.info-box .info-box-label {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.info-box .info-box-text {
+  font-size: 1rem;
+  font-weight: 600;
+}

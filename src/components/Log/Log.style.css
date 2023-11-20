@@ -5,30 +5,45 @@
     padding: 10px 12px 10px 15px;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
+.log .info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
-.id {
+.log .id {
     font-size: 15px;
     color: #6C6C6C;
     margin-top: 2px
 }
 
-.name {
+.log .name {
     margin: 0;
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
-.icon-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.time{
+.log .time{
     font-size: 15px;
 }
 
-.icon-container .icon {
-    display: flex;
-    max-width: 40px;
+.log .icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.log .date-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.log h1 {
+  margin: 0;
+  padding: 0;
 }

@@ -1,17 +1,37 @@
-.call-page{
-    display: flex;
-    gap: 1rem
+.call{
+  --min-width: 300px;
+  min-width: var(--min-width);
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
-.call-page .call-page-column{
+.call .nav-buttons{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    margin: 0 0 20px 0
 }
 
-@media (max-width: 870px) {
-    .call-page {
-        flex-direction: column;
-    }
+.call .btn-contact{
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  padding: 8px;
+  display: flex;
+  flex: 1;
+  justify-content: center;   
+  cursor: pointer;
 }
+
+.call .btn-contact.selected{
+  background-color: rgb(217, 201, 201);
+}
+
+.call .call-body {
+  overflow-y: auto;
+}
+

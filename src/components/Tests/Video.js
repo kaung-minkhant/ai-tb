@@ -5,29 +5,30 @@ export default class Camera {
   context = null
   canvas = null
 
-  createObjects = function (width, height) {
-    const container = document.getElementById('video-container')
+  createObjects = function (width, height, id) {
+    const container = document.getElementById(id)
     const video = document.createElement('video');
     video.id = 'video';
     video.width = width;
     video.height = height;
     video.autoplay = true;
-    video.style.transform = 'rotateY(180deg)'
+    video.style.transform = 'rotateY(180deg)';
     container.appendChild(video);
 
     const canvas = document.createElement('canvas');
     canvas.id = 'canvas';
     canvas.width = width;
     canvas.height = height;
-    canvas.style.transform = 'rotateY(180deg)'
+    canvas.style.transform = 'rotateY(180deg)';
+    canvas.style.display = 'none';
     container.appendChild(canvas);
   }
 
-  startCamera = (w=680, h=480) => {
+  startCamera = (w=680, h=480, id='video-container') => {
     this.width = w
     this.height = h
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      this.createObjects(w, h);
+      this.createObjects(w, h, id);
       this.video = document.getElementById('video');
       this.canvas = document.getElementById('canvas');
       this.context = this.canvas.getContext('2d');

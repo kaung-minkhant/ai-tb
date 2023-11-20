@@ -1,7 +1,7 @@
 import './PageOption.style.css'
-const PageOption = ({children, label=""}) => {
+const PageOption = ({children, label="", onClick=()=>{}}) => {
   return (
-    <div className='page-option'>
+    <div className='page-option' onClick={onClick}>
       {children}
       {/* <ScanSVG width={iconWidth} />  */}
       <span className='page-option-label'>{label}</span>
