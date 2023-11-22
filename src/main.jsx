@@ -10,9 +10,14 @@ import ViewAllScans from './components/ViewAllScans/ViewAllScans.component.jsx'
 import AnalyticPage from './pages/Analytic/Analytic.component.jsx'
 
 import CallPage from "./pages/Call/CallPage.component.jsx";
+import MapPage from "./pages/Map/MapPage.component.jsx";
+import DashboardPage from "./pages/Dashboard/DashboardPage.component.jsx";
+
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Tests from './components/Tests/Tests.component'
+
+// import 'leaflet/dist/leaflet.css'
 
 const router = createHashRouter([
   {
@@ -63,6 +68,26 @@ const router = createHashRouter([
       {
         index: true,
         element: <CallPage/>
+      }
+    ]
+  },
+  {
+    path: '/nearby',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <MapPage/>
+      }
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <DashboardPage/>
       }
     ]
   },

@@ -1,13 +1,15 @@
 .call-page{
     display: flex;
-    gap: 1rem
+    gap: 1rem;
+    flex: 1
 }
 
-.call-page .call-page-column{
+.call-page-column{
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
+    flex: 1;
 }
 
 @media (max-width: 870px) {
