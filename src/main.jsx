@@ -9,6 +9,9 @@ import DocterPage from './pages/DoctorPage/DocterPage.component.jsx'
 import ViewAllScans from './components/ViewAllScans/ViewAllScans.component.jsx'
 import AnalyticPage from './pages/Analytic/Analytic.component.jsx'
 
+import MapPage from "./pages/Map/MapPage.component.jsx";
+import DashboardPage from "./pages/Dashboard/DashboardPage.component.jsx";
+
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Tests from './components/Tests/Tests.component'
@@ -20,6 +23,8 @@ import CallPage from './pages/Call/CallPage.component.jsx'
 import AiScanPage from './pages/AiScan/AiScanPage.component.jsx'
 import AiScan from './components/AiScan/AiScan.component.jsx'
 import VideoCall from './pages/VideoCall/VideoCall.component.jsx'
+
+// import 'leaflet/dist/leaflet.css'
 
 const router = createHashRouter([
   {
@@ -115,6 +120,40 @@ const router = createHashRouter([
       }
     ]
   },
+  {
+    path: '/call',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <CallPage/>
+      }
+    ]
+  },
+  {
+    path: '/nearby',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <MapPage/>
+      }
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <DashboardPage/>
+      }
+    ]
+  },
+  {
+    path: '/codetests',
+    element: <Tests />
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
