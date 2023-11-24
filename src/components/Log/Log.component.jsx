@@ -1,8 +1,8 @@
 import './Log.style.css'
 
-const Log = ({name, id, icon, time, timeColor}) => {
+const Log = ({name, id, icon, time, timeColor, onClick=()=>{}}) => {
     return (
-      <div className="log">
+      <div className="log" onClick={onClick}>
         <div className="info">
           <div className="name">{name}</div>
           {

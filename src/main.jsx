@@ -19,6 +19,7 @@ import DoctorAppointments from './pages/DoctorAppointments/DoctorAppointments.co
 import CallPage from './pages/Call/CallPage.component.jsx'
 import AiScanPage from './pages/AiScan/AiScanPage.component.jsx'
 import AiScan from './components/AiScan/AiScan.component.jsx'
+import VideoCall from './pages/VideoCall/VideoCall.component.jsx'
 
 const router = createHashRouter([
   {
@@ -34,7 +35,6 @@ const router = createHashRouter([
       {
         index: true,
         element: <PatientPage />,
-        loader: PatientPageLoader,
       },
       {
         path: 'allscans',
@@ -44,11 +44,24 @@ const router = createHashRouter([
         path: 'profile',
         element: <PatientProfilePage />
       },
+      {
+        path: 'ai-scan',
+        element: <AiScanPage />,
+      },
+      {
+        path: 'appointments',
+        element: <DoctorAppointments />
+      },
+      {
+        path: 'call',
+        element: <VideoCall />
+      },
     ]
   },
   {
     path: '/doctor',
     element: <MainLayout />,
+    loader: MainLayoutLoader,
     children: [
       {
         index: true,
@@ -61,6 +74,10 @@ const router = createHashRouter([
       {
         path: 'patients',
         element: <DoctorPatientsPage />
+      },
+      {
+        path: 'patients/:patientId',
+        element: <PatientProfilePage />
       },
       {
         path: 'appointments',
@@ -77,6 +94,14 @@ const router = createHashRouter([
       {
         path: 'scan',
         element: <AiScan />
+      },
+      {
+        path: 'allscans',
+        element: <ViewAllScans width='300px' />,
+      },
+      {
+        path: 'call',
+        element: <VideoCall />
       }
     ]
   },

@@ -1,11 +1,17 @@
 .ai-scan {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ai-scan .ai-scan-box {
   position: relative;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   width: 300px;
-  height: 240px;
+  height: 400px;
+  /* outline: 3px solid red; */
+  box-sizing: border-box;
 }
 
 .ai-scan #video-element {
@@ -14,7 +20,42 @@
 
 .ai-scan .ai-scan-bounding {
   position: absolute;
-  width: 300px;
-  height: 240px;
-  border: 1px solid red;
+  top: 15px;
+  left: 15px;
+  width: 270px;
+  height: 365px;
+  border: 2px solid green;
+  z-index: 1;
+}
+
+.ai-scan .scan-warning-text {
+  text-align: center;
+  width: 80%;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.ai-scan .take-scan {
+  border: 3px solid black;
+  border-radius: 100%;
+  padding: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ai-scan .scan-upload {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.2rem;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  background-color: black;
+  cursor: pointer;
 }

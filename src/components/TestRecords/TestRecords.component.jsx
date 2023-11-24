@@ -5,7 +5,7 @@ const TestRecord = ({date, test}) => {
     <div style={{
       display: 'flex',
       justifyContent: 'space-between',
-      width: '80%',
+      width: '90%',
     }}>
       <span>{date}</span>
       <span>{test}</span>

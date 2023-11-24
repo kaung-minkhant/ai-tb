@@ -2,6 +2,7 @@ import './MedicineTracker.style.css'
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid"
 import Popup from 'reactjs-popup';
 import Calendar from '../Calendar/Calendar.component'
+import { getWidth } from '../../utils';
 
 const DayCheckBox = ({size=30, state='', label}) => {
   let stateIcon;
@@ -56,11 +57,9 @@ const WeeklyTracker = () => {
   )
 }
 
-const MedicineTracker = ({width='300px', isMobile = false, hideControl=false}) => {
-  const size = 180;
-  const scale = window.devicePixelRatio;
+const MedicineTracker = ({width=180 , isMobile = false, hideControl=false}) => {
   return (
-    <div className="med-tracker" style={{"--tracker-width": `${Math.floor(size * scale)}px`}}>
+    <div className="med-tracker" style={{"--tracker-width": `${getWidth(width)}px`}}>
       <div className='med-tracker-title'>Medication Intake</div>
       <WeeklyTracker />
       {

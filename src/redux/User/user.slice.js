@@ -16,7 +16,7 @@ const userSlice = createSlice({
       prepare(userObj) {
         return {
           payload: {
-            id: userObj.id ?? null,
+            id: userObj.userId ?? null,
             email: userObj.email ?? null,
             firstName: userObj.firstName ?? null,
             roleId: userObj.roleId ?? null

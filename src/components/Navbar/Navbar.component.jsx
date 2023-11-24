@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { deleteUser } from '../../utils'
+import { deleteUser, deleteUserAccessToken, deleteUserRole, getWidth } from '../../utils'
 import './Navbar.style.css'
 import { useState } from 'react'
 import { useMediaQuery } from '@uidotdev/usehooks'
@@ -37,6 +37,10 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     dispatch(logout())
+    deleteUser()
+    deleteUserAccessToken()
+    deleteUserRole()
+    navigate('/')
   }
   const handleOnClick = (index) => {
     setItem(index)
@@ -91,7 +95,9 @@ const Navbar = () => {
           </div>
         )
       }
-      <div className={`sidebar ${isMobile ? 'mobile' : ''} ${showSideBar ? 'show' : ''}`}>
+      <div className={`sidebar ${isMobile ? 'mobile' : ''} ${showSideBar ? 'show' : ''}`} style={{
+        "--sidebar-width": `${getWidth(130)}px`,
+      }}>
         <div>
           <div className='navbar-profile'>
             <div className='profile'>

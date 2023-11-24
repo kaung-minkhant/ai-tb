@@ -1,5 +1,7 @@
 .doctor-profile {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .doctor-profile .doctor-info {

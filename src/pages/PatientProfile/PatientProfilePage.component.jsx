@@ -5,9 +5,13 @@ import MedicineTracker from '../../components/MedicineTracker/MedicineTracker.co
 import Log from '../../components/Log/Log.component.jsx'
 import {UserIcon} from '@heroicons/react/24/outline'
 import ProfileProfile from '../../components/HelperComponents/ProfileProfile.component'
+import { getWidth } from '../../utils.js'
+import Medications from '../../components/Medications/Medications.component.jsx'
+import { useParams } from 'react-router-dom'
 
 const PatientProfilePage = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 650px)")
+  const {patientId} = useParams()
   return (
     <div className='patient-profile'>
       <ProfileProfile name='Phyo Wai Wai' imagePath='./images/patient_profile.png' />
@@ -18,15 +22,18 @@ const PatientProfilePage = () => {
       </div>
       <div className='patient-profile-med-info'>
         <div>
-          <MedicineTracker width="300px" isMobile={isMobile} hideControl={true} />
-          {
+          <MedicineTracker width={180} isMobile={isMobile} hideControl={true} />
+          {/* {
             !isMobile && (
               <Calendar width="300px" />
             )
-          }
+          } */}
         </div>
         <div>
-          <TestRecords width='300px' /> 
+          <Medications patientId={patientId}/>
+        </div>
+        <div>
+          <TestRecords width={`${getWidth(180)}px`} /> 
         </div>
       </div>
     </div>

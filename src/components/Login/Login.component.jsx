@@ -2,7 +2,7 @@ import './Login.style.css'
 import CustomInput from '../CustomInput/CustomInput.component'
 import CustomButton from '../CustomButton/CustomButton.component'
 import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-import { checkEmail, checkPassword, getUser, setUserAccessToken} from '../../utils'
+import { checkEmail, checkPassword, getUser, setUserAccessToken, setUserID, setUserRole} from '../../utils'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useLoginMutation } from '../../redux/Api/aiTbApi.slice'
@@ -23,7 +23,10 @@ const Login = ({styles: {loginWidth:width, fontSize}, setSignup}) => {
     if (user) {
       setUserAccessToken(user?.data.accessToken)
       const userObj = user.data.user 
+      console.log(userObj)
       dispatch(setUser(userObj))
+      setUserID(userObj.userId)
+      setUserRole(userObj.roleId)
     }
   }, [isSuccess])
 

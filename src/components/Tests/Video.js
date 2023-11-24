@@ -12,7 +12,7 @@ export default class Camera {
     video.width = width;
     video.height = height;
     video.autoplay = true;
-    video.style.transform = 'rotateY(180deg)';
+    video.style.transform = 'scaleY(1)';
     container.appendChild(video);
 
     const canvas = document.createElement('canvas');
@@ -27,13 +27,15 @@ export default class Camera {
   startCamera = (w=680, h=480, id='video-container') => {
     this.width = w
     this.height = h
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    if ( navigator.mediaDevices.getUserMedia) {
       this.createObjects(w, h, id);
       this.video = document.getElementById('video');
       this.canvas = document.getElementById('canvas');
       this.context = this.canvas.getContext('2d');
       (function (video) {
-        navigator.mediaDevices.getUserMedia({video: true}).then(function (stream) {
+        navigator.mediaDevices.getUserMedia({video: {
+          facingMode: 'environment',
+        }}).then(function (stream) {
             video.srcObject = stream;
             video.play();
         });
@@ -42,7 +44,16 @@ export default class Camera {
   }
 
   takeSnapshot = () => {
+    let formData;
     this.context.drawImage(this.video, 0, 0, this.width, this.height);
+    const image = this.canvas.toDataURL("image/png")
+    // this.canvas.toBlob(function (blob) {
+    //   let formdata = new FormData()
+    //   formdata.append('image', blob, 'kmk.png')
+    //   console.log(formdata)
+    //   formData = formData;
+    // })
+    return image
   }
 }
 

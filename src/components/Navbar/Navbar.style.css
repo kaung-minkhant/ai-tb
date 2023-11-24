@@ -1,10 +1,11 @@
 .sidebar {
+  --sidebar-width: 200px;
   position: absolute;
   top: 0;
   left: 0;
   width: 200px;
   height: 100vh;
-  z-index: 1;
+  z-index: 9;
   background-color: white;
   overflow-x: hidden;
   border-right: 2px solid black;
@@ -19,7 +20,7 @@
 }
 
 .sidebar.mobile.show {
-  width: 170px;
+  width: var(--sidebar-width);
 }
 
 .sidebar .navbar-profile {
