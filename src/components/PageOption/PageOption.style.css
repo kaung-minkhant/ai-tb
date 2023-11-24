@@ -1,18 +1,20 @@
 .page-option {
+  --width: 100px;
   border: 2px solid black;
   border-radius: 1rem;
-  width: fit-content;
+  width: var(--width);
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
   gap: 0.6rem;
-  padding: 1rem 0;
+  padding: 0.7rem 0.2rem;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .page-option .page-option-label {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }

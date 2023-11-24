@@ -32,9 +32,27 @@ export const setUserAccessToken = (accessToken) => {
   }
 }
 
+export const getUserAccessToken = () => {
+  if (typeof Storage !== 'undefined') {
+    return localStorage.getItem('accToken')
+  }
+}
+
 export const deleteUserAccessToken = () => {
   if (typeof Storage !== 'undefined') {
     localStorage.removeItem('accToken')
+  }
+}
+
+export const setUserID = (id) => {
+  if (typeof Storage !== 'undefined') {
+    localStorage.setItem('user', id)
+  }
+}
+
+export const getUserId = () => {
+  if (typeof Storage !== 'undefined') {
+    return localStorage.getItem('user')
   }
 }
 
@@ -42,4 +60,27 @@ export const deleteUser = () => {
   if (typeof Storage !== 'undefined') {
     localStorage.removeItem('user')
   }
+}
+
+export const setUserRole = (role) => {
+  if (typeof Storage !== 'undefined') {
+    localStorage.setItem('userRole', role)
+  }
+}
+
+export const getUserRole = () => {
+  if (typeof Storage !== 'undefined') {
+    return localStorage.getItem('userRole')
+  }
+}
+
+export const deleteUserRole = () => {
+  if (typeof Storage !== 'undefined') {
+    localStorage.removeItem('userRole')
+  }
+}
+
+export const getWidth = (width) => {
+  const scale = window.devicePixelRatio;
+  return Math.floor(width*scale)
 }

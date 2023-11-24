@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { deleteUser } from '../../utils'
+import { deleteUser, deleteUserAccessToken, deleteUserRole, getWidth } from '../../utils'
 import './Navbar.style.css'
 import { useState } from 'react'
 import { useMediaQuery } from '@uidotdev/usehooks'
@@ -13,14 +13,34 @@ const Navbar = () => {
   const [item, setItem] = useState(0)
   const isMobile = useMediaQuery("only screen and (max-width: 650px)")
   const [showSideBar, setShowSideBar] = useState(false)
-  const navItems = ['DashBoard', 'View Scan History', 'View Test Records', 'Analysis']
   const activeList = []
-  const navPaths = ["/patient", "/patient/allscans", "/patient", '/analytic']
+
+  const patientNav = {
+    Profile: '/patient/profile',
+    DashBoard: '/patient',
+    "View Scan History": '/patient/allscans',
+    "View Test Records": '/patient',
+    Analysis: '/analytic',
+  }
+
+  const doctorNav = {
+    Profile: '/doctor/profile',
+    DashBoard: '/doctor',
+    Patients: '/doctor/patients',
+    Appointments: '/doctor/appointments',
+    Calls: '/doctor/calls',
+    'AI Scan': '/doctor/ai-scan',
+  }
+
+  let navItems;
+  let navPaths;
 
   const handleLogOut = () => {
     dispatch(logout())
-    // deleteUser()
-    // navigate('/') 
+    deleteUser()
+    deleteUserAccessToken()
+    deleteUserRole()
+    navigate('/')
   }
   const handleOnClick = (index) => {
     setItem(index)
@@ -33,6 +53,24 @@ const Navbar = () => {
   const handleSideHide = () => {
     setShowSideBar(false)
   }
+
+  let person; 
+
+  if (window.location.href.match("#/patient")) {
+    person = 'patient'
+  } else if(window.location.href.match("#/doctor")) {
+    person = 'doctor'
+  }
+
+  if (person === 'patient') {
+    navItems = Object.keys(patientNav);
+    navPaths = Object.values(patientNav);
+  } else if (person === 'doctor') {
+    navItems = Object.keys(doctorNav)
+    navPaths = Object.values(doctorNav)
+  }
+
+
 
   navItems.forEach((navItem, index) => {
     let regex;
@@ -57,7 +95,9 @@ const Navbar = () => {
           </div>
         )
       }
-      <div className={`sidebar ${isMobile ? 'mobile' : ''} ${showSideBar ? 'show' : ''}`}>
+      <div className={`sidebar ${isMobile ? 'mobile' : ''} ${showSideBar ? 'show' : ''}`} style={{
+        "--sidebar-width": `${getWidth(130)}px`,
+      }}>
         <div>
           <div className='navbar-profile'>
             <div className='profile'>

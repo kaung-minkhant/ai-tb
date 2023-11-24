@@ -1,18 +1,21 @@
 import './WelcomePage.style.css'
 import Login from "../../components/Login/Login.component"
 import { useEffect, useState } from 'react';
-import { getWindowSize } from '../../utils';
-import { useNavigate } from 'react-router-dom';
+import { getUserId, getUserRole, getWindowSize } from '../../utils';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUserId, selectUserRoleId } from '../../redux/User/user.slice';
 import Register from '../../components/Register/Register.component';
 
 export const WelcomePageLoader = () => {
-  return null
+  const id = getUserId()
+  const role = getUserRole()
+  return {id, role}
 }
 
 const WelcomePage = () => {
   const navigate = useNavigate()
+  const {id, role} = useLoaderData()
   const [signup, setSignUp] = useState(false)
   const userId = useSelector(selectUserId)
   const userRoleId = useSelector(selectUserRoleId)
@@ -37,6 +40,7 @@ const WelcomePage = () => {
       })
     }
   }
+
   useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize) 
@@ -46,6 +50,8 @@ const WelcomePage = () => {
   useEffect(() => {
     if (userId && userRoleId === 1) {
       navigate('/patient') 
+    } else if (userId && userRoleId === 2) {
+      navigate('/doctor')
     }
   }, [userId, userRoleId])
 

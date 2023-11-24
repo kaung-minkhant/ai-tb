@@ -1,0 +1,33 @@
+.audio {
+  display: none;
+}
+
+.control-btn-group {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.meeting-info {
+  color:blueviolet;
+}
+
+.doctor-check {
+  position: relative;
+  top: 3px;
+  margin-left: 1rem;
+}
+
+#video-list {
+  width: 100vw;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+#video-list video {
+  width: 25vw;
+}

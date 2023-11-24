@@ -1,0 +1,18 @@
+.doctor-patients-page {
+  width: 300px;
+}
+
+.doctor-patients-page .doctor-patients-title {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.doctor-patients-page .doctor-patients {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}

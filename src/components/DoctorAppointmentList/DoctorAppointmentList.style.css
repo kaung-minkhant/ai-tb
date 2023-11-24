@@ -1,0 +1,14 @@
+.doctor-appointment-list {
+}
+
+.doctor-appointment-list .doctor-appointment-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.doctor-appointment-list .doctor-appointment-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

@@ -2,6 +2,7 @@ import './MedicineTracker.style.css'
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid"
 import Popup from 'reactjs-popup';
 import Calendar from '../Calendar/Calendar.component'
+import { getWidth } from '../../utils';
 
 const DayCheckBox = ({size=30, state='', label}) => {
   let stateIcon;
@@ -43,7 +44,7 @@ const WeeklyTracker = () => {
   return (
     <div style={{
       display: 'flex',
-      gap: '1rem',
+      gap: '0.7rem',
       width: 'fit-content',
       margin: '1rem',
     }}>
@@ -56,28 +57,33 @@ const WeeklyTracker = () => {
   )
 }
 
-const MedicineTracker = ({width='300px', isMobile = false}) => {
+const MedicineTracker = ({width=180 , isMobile = false, hideControl=false}) => {
   return (
-    <div className="med-tracker" style={{"--tracker-width": width}}>
+    <div className="med-tracker" style={{"--tracker-width": `${getWidth(width)}px`}}>
+      <div className='med-tracker-title'>Medication Intake</div>
       <WeeklyTracker />
-      <div className="daily-med-info">
-        <div className='center-div'>
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}>
-            <p>Today is</p>
-            <p style={{
-              fontSize: '1.3rem',
-              fontWeight: '700',
-            }}>6 Nov 2023</p>
+      {
+        !hideControl && (
+          <div className="daily-med-info">
+            <div className='center-div'>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}>
+                <p>Today is</p>
+                <p style={{
+                  fontSize: '1rem',
+                  fontWeight: '700',
+                }}>6 Nov 2023</p>
+              </div>
+            </div>
+            <div className='center-div'>
+              <button className='btn med-taken'>I have taken meds.</button>
+            </div>
           </div>
-        </div>
-        <div className='center-div'>
-          <button className='btn med-taken'>I have taken meds.</button>
-        </div>
-      </div>
+        )
+      }
       {
         isMobile && (
           <Popup trigger={

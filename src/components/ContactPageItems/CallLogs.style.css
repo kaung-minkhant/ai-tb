@@ -1,0 +1,23 @@
+.log-date {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.log-date .date {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.log-date .call-log {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;  
+}
+
+.logs {
+  display: flex;
+  flex-direction: column;
+}

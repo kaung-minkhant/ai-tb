@@ -1,44 +1,61 @@
 .ai-scan {
-  border: 2px solid black;
-  border-radius: 1rem;
-  width: fit-content;
-
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-/* .ai-scan { */
-/*   --ai-scan-width: 200px; */
-/*   border: 2px solid black; */
-/*   border-radius: 1rem; */
-/*   overflow: hidden; */
-/*   width: var(--ai-scan-width); */
-/*   display: flex; */
-/*   box-sizing: border-box; */
-/*   padding: 1rem; */
-/* } */
 
-/* .ai-scan .ai-scan-image { */
-/*   width: 50%; */
-/*   object-fit: contain; */
-/*   border-radius: 1rem; */
-/*   overflow: hidden; */
-/* } */
+.ai-scan .ai-scan-box {
+  position: relative;
+  margin-top: 1rem;
+  width: 300px;
+  height: 400px;
+  /* outline: 3px solid red; */
+  box-sizing: border-box;
+}
 
-/* .ai-scan .ai-scan-btns { */
-/*   width: 50%; */
-/*   display: flex; */
-/*   flex-direction: column;  */
-/*   justify-content: center; */
-/*   align-items: center; */
-/*   gap: 1rem; */
-/* } */
+.ai-scan #video-element {
+  position: absolute;
+}
 
-/* .ai-scan .ai-scan-btn { */
-/*   width: 80%; */
-/*   font-size: 1.2rem; */
-/* } */
+.ai-scan .ai-scan-bounding {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 270px;
+  height: 365px;
+  border: 2px solid green;
+  z-index: 1;
+}
 
-/* .ai-scan .ai-scan-btn:hover { */
-/*   box-shadow: none; */
-/* } */
+.ai-scan .scan-warning-text {
+  text-align: center;
+  width: 80%;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.ai-scan .take-scan {
+  border: 3px solid black;
+  border-radius: 100%;
+  padding: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ai-scan .scan-upload {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.2rem;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  background-color: black;
+  cursor: pointer;
+}
