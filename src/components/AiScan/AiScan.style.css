@@ -22,8 +22,8 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  width: 270px;
-  height: 365px;
+  width: 265px;
+  height: 205px;
   border: 2px solid green;
   z-index: 1;
 }
@@ -48,7 +48,7 @@
 
 .ai-scan .scan-upload {
   display: flex;
-  margin-top: 1rem;
+  margin-top: 10%;
   flex-direction: row;
   align-items: center;
   gap: 0.7rem;
@@ -58,4 +58,11 @@
   border-radius: 1rem;
   background-color: black;
   cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .ai-scan .ai-scan-bounding {
+    width: 270px;
+    height: 365px;
+  }
 }

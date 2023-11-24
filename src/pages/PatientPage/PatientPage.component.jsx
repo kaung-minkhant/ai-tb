@@ -6,6 +6,8 @@ import {AppointmentsSVG, CallSVG, ScanSVG, TestResultSVG} from '../../components
 import { useMediaQuery } from "@uidotdev/usehooks"
 import { getWidth } from "../../utils.js"
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useGetMedicationQuery } from "../../redux/Api/aiTbApi.slice.js"
 
 export const PatientPageLoader = () => {
   return null
@@ -13,17 +15,38 @@ export const PatientPageLoader = () => {
 
 const PatientPage = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 650px)")
+  const [medications, setMedications] = useState([])
+  const {data: medication, isLoading, isSuccess: isMedicationQuerySuccess} = useGetMedicationQuery({
+    isDoctor: false,
+    patientId: null
+  })
   const navigate = useNavigate()
+  useEffect(() => {
+    if (isMedicationQuerySuccess) {
+      setMedications(medication.data.medications)
+    }
+  }, [isMedicationQuerySuccess])
+
+
   const handleClick = (path) => {
     navigate(`/patient/${path}`)
   }
+
+
+
   return (
     <div className="patient-page">
       <div className="patient-page-title">
         <h2>Welcome, Phyo</h2>
       </div>
       <div>
-        <MedicineTracker width={ 180 } isMobile={isMobile} />
+        {
+          medications.map(medication => {
+            return (
+              <MedicineTracker medication={medication} key={medication.medicationId} width={180} isMobile={isMobile}  />
+            )
+          })
+        }
         {
           !isMobile && (
             <Calendar width={`${getWidth(200)}px`} />

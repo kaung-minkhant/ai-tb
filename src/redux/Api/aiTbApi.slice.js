@@ -38,28 +38,42 @@ export const aiTbApiSlice = createApi({
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`
         }
-      })  
+      })
     }),
     createMedication: builder.mutation({
-      query: ({patientId, data}) => ({
-        url: `/users/${patientId}/medications`,
-        method: 'POST',
-        body: {
-          name: data.name,
-          startDate: data.startDate,
-          endDate: data.endDate,
-          repeatsEvery: data.repeatsEvery,
-          dailyDose: 1
-        },
+      query: ({ patientId, data }) => {
+        return {
+          url: `/users/${patientId}/medications`,
+          method: 'POST',
+          body: {
+            name: data.name,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            repeatsEvery: data.repeatsEvery,
+            dailyDose: 1
+          },
+          headers: {
+            authorization: `Bearer ${getUserAccessToken()}`
+          }
+        }
+      }
+    }),
+    getMedication: builder.query({
+      query: ({ isDoctor, patientId }) => ({
+        url: isDoctor ? `/users/${patientId}/medications` : `/myprofile/medications/`,
+        method: 'GET',
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`
         }
       })
     }),
-    getMedication: builder.query({
-      query: ({patientId}) => ({
-        url: `/users/${patientId}/medications`,
-        method: 'GET',
+    takeMedication: builder.mutation({
+      query: (medId) => ({
+        url: `/myprofile/medications/${medId}/trackers`,
+        body: {
+          doseTime: new Date().toDateString(),
+        },
+        method: 'POST',
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`
         }
@@ -82,7 +96,8 @@ export const aiTbApiSlice = createApi({
   }),
 })
 
-export const { useGetPingQuery, useLoginMutation, useSignupMutation, useUploadXrayMutation, 
+export const { useGetPingQuery, useLoginMutation, useSignupMutation, useUploadXrayMutation,
   useGetPatientsQuery, useGetCallLogsQuery, useCreateMedicationMutation,
+  useTakeMedicationMutation,
   useGetMedicationQuery
 } = aiTbApiSlice

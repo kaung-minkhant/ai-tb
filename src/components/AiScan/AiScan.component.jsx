@@ -5,16 +5,19 @@ import PageHeading from '../HelperComponents/PageHeading.component'
 import { ScanSVG } from '../SVG/SVG.component'
 import {CameraIcon, ArrowUpTrayIcon} from '@heroicons/react/24/outline'
 import { useUploadXrayMutation } from '../../redux/Api/aiTbApi.slice'
+import { useMediaQuery } from '@uidotdev/usehooks'
 
 const AiScan = () => {
   const [camera, _] = useState(new Camera)
+  const isMobile = useMediaQuery("only screen and (max-width : 650px)")
   const [uploadXray, {data, isSuccess, isLoading}] = useUploadXrayMutation()
   useEffect(() => {
-    camera.startCamera(300, 400, 'video-element')
+    if (isMobile) {
+      camera.startCamera(300, 400, 'video-element', true)
+    } else {
+      camera.startCamera(300, 240, 'video-element')
+    }
   }, [])
-  useEffect(() => {
-    console.log('uploading')
-  }, [isLoading])
   const handleSave = () => {
     const dataUrl = camera.takeSnapshot()
     uploadXray({dataURL: dataUrl})
@@ -30,7 +33,7 @@ const AiScan = () => {
       <div className='take-scan' onClick={handleSave}>
         <CameraIcon width={40} />
       </div>
-      <div className='scan-upload' onClick={handleSave}>
+      <div className='scan-upload'>
         <ArrowUpTrayIcon width={25} /> Upload from Device Storage
       </div>
     </div>

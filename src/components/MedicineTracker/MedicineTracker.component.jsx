@@ -3,6 +3,9 @@ import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid"
 import Popup from 'reactjs-popup';
 import Calendar from '../Calendar/Calendar.component'
 import { getWidth } from '../../utils';
+import { useTakeMedicationMutation } from '../../redux/Api/aiTbApi.slice';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DayCheckBox = ({size=30, state='', label}) => {
   let stateIcon;
@@ -38,9 +41,9 @@ const DayCheckBox = ({size=30, state='', label}) => {
   )
 }
 
-const WeeklyTracker = () => {
+const WeeklyTracker = ({state}) => {
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat']
-  const state = ['NO', 'YES', 'YES', 'NO', 'YES', 'NOT_YET', 'NOT_YET']
+  // const state = ['NO', 'YES', 'YES', 'NO', 'YES', 'NOT_YET', 'NOT_YET']
   return (
     <div style={{
       display: 'flex',
@@ -57,11 +60,65 @@ const WeeklyTracker = () => {
   )
 }
 
-const MedicineTracker = ({width=180 , isMobile = false, hideControl=false}) => {
+const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=false}) => {
+  const navigate = useNavigate()
+  const [takeMedication, {isSuccess: isTakeMedicationMutationSuccess}] = useTakeMedicationMutation()
+
+  useEffect(() => {
+    if (isTakeMedicationMutationSuccess) {
+      navigate(0) 
+    }
+  }, [isTakeMedicationMutationSuccess])
+  const {weekStatus} = getWeekData(medication)
+  console.log('week', weekStatus)
+
+  const handleTakeMed = () => {
+    takeMedication(medication.medicationId)
+  }
+  function getDaysArray(start, end) {
+      for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
+          arr.push(new Date(dt).toDateString());
+      }
+      return arr;
+  };
+  function getWeekData(medication) {
+    if (!medication) return null
+    const currentDate = new Date()
+    const trackers = medication.MedTrackers
+    const startDate = new Date(medication.startDate);
+    const endDate = new Date(medication.endDate);
+    const daysArray = getDaysArray(startDate, endDate)
+    const statusArray = new Array(daysArray.length).fill("NOT_YET")
+    daysArray.forEach((day, index) => {
+      const trackerDay = trackers?.filter(tracker => new Date(tracker.doseTime).toDateString() === day )
+      if (trackerDay.length === 0 ) {
+        if (new Date(day) < currentDate) {
+          statusArray[index] = 'NO'
+        } else {
+          statusArray[index] = 'NOT_YET'
+        }
+      } else {
+        statusArray[index] = 'YES'
+      }
+    })
+    const currentIndex = daysArray.indexOf(currentDate.toDateString()) 
+    const currentDay = currentDate.getDay() 
+    let weekStartIndex = currentIndex - currentDay
+    let weekEndIndex = currentIndex + (6 - currentDay)
+    if (weekStartIndex < 0) weekStartIndex = 0
+    if (weekEndIndex > daysArray.length - 1) weekEndIndex = daysArray.length - 1
+    const weekStatus = statusArray.slice(weekStartIndex, weekEndIndex+1)
+    return {
+      weekStatus: weekStatus,
+      startDate: startDate,
+      endDate: endDate
+    }
+  }
+
   return (
     <div className="med-tracker" style={{"--tracker-width": `${getWidth(width)}px`}}>
-      <div className='med-tracker-title'>Medication Intake</div>
-      <WeeklyTracker />
+      <div className='med-tracker-title'>{medication?.name} Intake</div>
+      <WeeklyTracker state={weekStatus} />
       {
         !hideControl && (
           <div className="daily-med-info">
@@ -79,7 +136,7 @@ const MedicineTracker = ({width=180 , isMobile = false, hideControl=false}) => {
               </div>
             </div>
             <div className='center-div'>
-              <button className='btn med-taken'>I have taken meds.</button>
+              <button onClick={handleTakeMed} className='btn med-taken'>I have taken meds.</button>
             </div>
           </div>
         )

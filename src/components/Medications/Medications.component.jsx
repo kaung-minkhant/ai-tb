@@ -1,20 +1,36 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import './Medications.style.css'
 import Popup from 'reactjs-popup'
 import { useCreateMedicationMutation, useGetMedicationQuery } from '../../redux/Api/aiTbApi.slice'
+import { useNavigate } from 'react-router-dom'
 
-const Medications = ({patientId}) => {
-  const isDoctor = window.location.href.includes('doctor')
-  const [createMedication] = useCreateMedicationMutation()
-  const {data: medication, isLoading} = useGetMedicationQuery({patientId})
-  console.log(medication)
+const Medications = ({medications, isSuccess, isMutationSuccess, isDoctor, createMedication, patientId}) => {
+  const navigate = useNavigate()
   const [medData, setMedData] = useState({
     name: '',
-    stateDate: '',
+    startDate: '',
     endDate: '',
     repeatsEvery: 'day',
   })
-  console.log(medData)
+
+  const listRenders = useMemo(() => {
+    const listRenders = []
+    medications.forEach(medication => {
+      listRenders.push(
+        <tr key={medication.medicationId}>
+          <td>{medication.name}</td>
+          <td>{medication.dailyDose}</td>
+        </tr>
+      )
+    })
+    return listRenders
+  }, [medications])
+  
+  useEffect(() => {
+    if (isMutationSuccess) {
+      navigate(0)
+    }
+  }, [isMutationSuccess])
   const handleOnSubmit = (event, close) => {
     event.preventDefault()
     createMedication({
@@ -36,10 +52,9 @@ const Medications = ({patientId}) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Med one</td>
-            <td>123</td>
-          </tr>
+          {
+            listRenders
+          }
         </tbody>
       </table>
       {
@@ -64,10 +79,10 @@ const Medications = ({patientId}) => {
                     <label>
                       Start Date: <input type='date' 
                         // placeholder='med one' 
-                        value={medData.stateDate} 
+                        value={medData.startDate} 
                         onChange={e => setMedData({
                           ...medData,
-                          stateDate: e.target.value
+                          startDate: e.target.value
                         })}></input>
                     </label>
                     <label>
