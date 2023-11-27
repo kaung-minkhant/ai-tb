@@ -4,10 +4,13 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 // import 'leaflet/dist/leaflet.css'
 import 'leaflet/dist/leaflet.css';
 const Map = ({Data}) => {
-  console.log(Data)
-  const totalClinics = Data.length;
-  const sumLat = Data.reduce((acc, clinic) => acc + clinic.lat, 0);
-  const sumLng = Data.reduce((acc, clinic) => acc + clinic.long, 0);
+  if (!Data) {
+    return <h1>Loading</h1>
+  }
+  console.log('data', Data)
+  const totalClinics = Data?.length;
+  const sumLat = Data?.reduce((acc, clinic) => acc + parseFloat(clinic.lat), 0);
+  const sumLng = Data?.reduce((acc, clinic) => acc + parseFloat(clinic.long), 0);
   const avgLat = sumLat / totalClinics;
   const avgLng = sumLng / totalClinics;
   const center =  [avgLat, avgLng];
@@ -32,7 +35,7 @@ const Map = ({Data}) => {
         </Popup>
       </Marker> */}
 
-      {Data.map((clinic, index) => (    
+      {Data?.map((clinic, index) => (    
         <Marker key={index} position={[clinic.lat, clinic.long]}>
           <Popup>
             <h3>{clinic.name}</h3>

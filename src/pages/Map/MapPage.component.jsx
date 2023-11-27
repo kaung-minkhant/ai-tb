@@ -10,24 +10,20 @@ export const MapPageLoader = () => {
 
 const MapPage = () =>{
     const isMobile = useMediaQuery("only screen and (max-width : 650px)");
-
     const {data, isLoading, isSuccess} = useGetClinicsQuery()
+    const [Data, setData] = useState(null)
    
-    let Data;
     useEffect(() => {
-        if(isSuccess){
-            console.log("HEE");
-            console.log(data);
-            // Data = data.data.clinics
-        }
-      }, [isSuccess])
-
+      if(isSuccess){
+        setData(data.data.clinics)
+      }
+    }, [isLoading])
     return(
 
         <div className="map-page">
             <div className="top">
                 <h1 className="title">Nearby Clinics</h1>
-                <p1 className="desc">The nearby clinics that support, diagnose and cure pulmonary TB are listed below. Please match the location and click on each clinic to view more details.</p1>
+                <p className="desc">The nearby clinics that support, diagnose and cure pulmonary TB are listed below. Please match the location and click on each clinic to view more details.</p>
             </div>
             <div className="location">
                 <select  className="dropdown" name="country" id="country">
@@ -41,9 +37,7 @@ const MapPage = () =>{
                 </select>
             </div>
             <div className="map" id="map">
-                {
-                    !isLoading?<Map Data={Data}/> : <h1>LOADING</h1>
-                }
+              <Map Data={Data} />
             </div>
         </div>
     )
