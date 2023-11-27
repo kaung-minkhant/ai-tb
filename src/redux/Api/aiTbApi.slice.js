@@ -92,12 +92,19 @@ export const aiTbApiSlice = createApi({
           }
         }
       }
-    })
+    }),
+    getClinics: builder.query({
+      query: () => ({
+        url: `/clinics?country=myanmar&city=yangon`,
+        method: 'GET',
+        
+      })
+    }),
   }),
 })
 
 export const { useGetPingQuery, useLoginMutation, useSignupMutation, useUploadXrayMutation,
   useGetPatientsQuery, useGetCallLogsQuery, useCreateMedicationMutation,
   useTakeMedicationMutation,
-  useGetMedicationQuery
+  useGetMedicationQuery, useGetClinicsQuery
 } = aiTbApiSlice

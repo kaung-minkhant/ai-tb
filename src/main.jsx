@@ -61,6 +61,10 @@ const router = createHashRouter([
         path: 'call',
         element: <VideoCall />
       },
+      {
+        path: 'nearby',
+        element: <MapPage/>
+      }
     ]
   },
   {
@@ -133,6 +137,7 @@ const router = createHashRouter([
   {
     path: '/nearby',
     element: <MainLayout />,
+    loader: MainLayoutLoader,
     children: [
       {
         index: true,
@@ -143,6 +148,7 @@ const router = createHashRouter([
   {
     path: '/dashboard',
     element: <MainLayout />,
+    loader: MainLayoutLoader,
     children: [
       {
         index: true,
