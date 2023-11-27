@@ -34,6 +34,7 @@ export default class Camera {
     if ( navigator.mediaDevices.getUserMedia) {
       this.createObjects(w, h, id, isMobile);
       this.video = document.getElementById('video');
+      this.video.autoplay = true
       this.canvas = document.getElementById('canvas');
       this.context = this.canvas.getContext('2d');
       (function (video) {
@@ -41,10 +42,14 @@ export default class Camera {
           facingMode: 'environment',
         }}).then(function (stream) {
             video.srcObject = stream;
-            video.play();
+            // video.play();
         });
       })(this.video)
     }
+  }
+
+  stopCamera = () => {
+    this.video.srcObject = null
   }
 
   takeSnapshot = () => {

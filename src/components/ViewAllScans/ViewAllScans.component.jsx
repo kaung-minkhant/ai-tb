@@ -2,7 +2,7 @@ import './ViewAllScans.style.css'
 
 const ViewScan = ({width, positive}) => {
   return (
-    <div className='view-scan' style={{"--view-scan-width": width}}>
+    <div className='view-scan1' style={{"--view-scan-width": width}}>
       <div style={{
         display: 'flex',
         gap: '1rem',

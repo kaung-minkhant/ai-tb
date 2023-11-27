@@ -22,6 +22,15 @@ export const aiTbApiSlice = createApi({
         body: credentials,
       })
     }),
+    getProfile: builder.mutation({
+      query: role => ({
+        url: '/myprofile',
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      })
+    }),
     getPatients: builder.query({
       query: () => ({
         url: '/myprofile/mypatients',
@@ -79,25 +88,11 @@ export const aiTbApiSlice = createApi({
         }
       })
     }),
-    uploadXray: builder.mutation({
-      query: ({ dataURL }) => {
-        return {
-          url: `/images`,
-          method: 'POST',
-          body: {
-            img: dataURL
-          },
-          headers: {
-            authorization: `Bearer ${getUserAccessToken()}`,
-          }
-        }
-      }
-    })
   }),
 })
 
-export const { useGetPingQuery, useLoginMutation, useSignupMutation, useUploadXrayMutation,
+export const { useGetPingQuery, useLoginMutation, useSignupMutation,
   useGetPatientsQuery, useGetCallLogsQuery, useCreateMedicationMutation,
   useTakeMedicationMutation,
-  useGetMedicationQuery
+  useGetMedicationQuery, useGetProfileMutation
 } = aiTbApiSlice
