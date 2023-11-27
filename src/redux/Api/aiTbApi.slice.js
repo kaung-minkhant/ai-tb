@@ -100,11 +100,18 @@ export const aiTbApiSlice = createApi({
         
       })
     }),
+    getCountries: builder.query({
+      query: () => ({
+        url: `/countries`,
+        method: 'GET',
+        
+      })
+    }),
   }),
 })
 
 export const { useGetPingQuery, useLoginMutation, useSignupMutation, useUploadXrayMutation,
   useGetPatientsQuery, useGetCallLogsQuery, useCreateMedicationMutation,
   useTakeMedicationMutation,
-  useGetMedicationQuery, useGetClinicsQuery
+  useGetMedicationQuery, useGetClinicsQuery, useGetCountriesQuery
 } = aiTbApiSlice

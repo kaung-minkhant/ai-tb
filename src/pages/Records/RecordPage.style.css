@@ -1,0 +1,43 @@
+.records{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.title{
+    margin: 0
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    width: auto
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 30px;
+}
+
+table {
+  border-collapse: collapse;
+
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd
+  }
+  
+th {
+background-color: #8ff3e0;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+  

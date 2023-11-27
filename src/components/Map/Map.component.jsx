@@ -7,7 +7,6 @@ const Map = ({Data}) => {
   if (!Data) {
     return <h1>Loading</h1>
   }
-  console.log('data', Data)
   const totalClinics = Data?.length;
   const sumLat = Data?.reduce((acc, clinic) => acc + parseFloat(clinic.lat), 0);
   const sumLng = Data?.reduce((acc, clinic) => acc + parseFloat(clinic.long), 0);

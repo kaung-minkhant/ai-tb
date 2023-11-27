@@ -23,7 +23,7 @@ import CallPage from './pages/Call/CallPage.component.jsx'
 import AiScanPage from './pages/AiScan/AiScanPage.component.jsx'
 import AiScan from './components/AiScan/AiScan.component.jsx'
 import VideoCall from './pages/VideoCall/VideoCall.component.jsx'
-
+import RecordPage from "./pages/Records/RecordPage.component.jsx"
 // import 'leaflet/dist/leaflet.css'
 
 const router = createHashRouter([
@@ -64,6 +64,10 @@ const router = createHashRouter([
       {
         path: 'nearby',
         element: <MapPage/>
+      },
+      {
+        path: 'records',
+        element: <RecordPage/>
       }
     ]
   },
