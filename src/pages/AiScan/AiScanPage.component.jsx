@@ -3,11 +3,18 @@ import PageOption from '../../components/PageOption/PageOption.component'
 import {ScanSVG, HistorySVG} from '../../components/SVG/SVG.component'
 import { useNavigate } from 'react-router-dom'
 import { getWidth } from '../../utils'
+import { useSelector } from 'react-redux'
+import { selectUserRoleId } from '../../redux/User/user.slice'
 
 const AiScanPage = () => {
+  const role = useSelector(selectUserRoleId)
   const navigate = useNavigate()
   const handleClick = (path) => {
-    navigate(`/doctor/${path}`)
+    if (role === 1) {
+      navigate(`/patient/${path}`)
+    } else if (role === 2) {
+      navigate(`/doctor/${path}`)
+    }
   }
   return (
     <div className='ai-scan-page'>

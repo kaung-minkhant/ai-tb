@@ -16,10 +16,17 @@ const userSlice = createSlice({
       prepare(userObj) {
         return {
           payload: {
-            id: userObj.userId ?? null,
+            address: userObj.address ?? null,
+            birthData: userObj.birthDate ?? null,
+            country: userObj.country ?? null,
+            currentCountry: userObj.currentCountry ?? null,
             email: userObj.email ?? null,
             firstName: userObj.firstName ?? null,
-            roleId: userObj.roleId ?? null
+            lastName: userObj.lastName ?? null,
+            phone: userObj.phone ?? null,
+            race: userObj.race ?? null,
+            roleId: userObj.roleId ?? null,
+            id: userObj.userId ?? null,
           }
         }
       },

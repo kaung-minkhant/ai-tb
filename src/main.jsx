@@ -23,9 +23,12 @@ import CallPage from './pages/Call/CallPage.component.jsx'
 import AiScanPage from './pages/AiScan/AiScanPage.component.jsx'
 import AiScan from './components/AiScan/AiScan.component.jsx'
 import VideoCall from './pages/VideoCall/VideoCall.component.jsx'
+
 import RecordTablePage from "./pages/RecordTable/RecordTablePage.component.jsx"
 import RecordsPage from "./pages/Records/RecordsPage.component.jsx"
 // import 'leaflet/dist/leaflet.css'
+
+import ViewScan from './components/ViewScan/ViewScan.component.jsx'
 
 const router = createHashRouter([
   {
@@ -46,6 +49,10 @@ const router = createHashRouter([
         path: 'allscans',
         element: <ViewAllScans width='300px' />,
       },
+      {
+        path: 'view-scan',
+        element: <ViewScan />
+      }, 
       {
         path: 'profile',
         element: <PatientProfilePage />
@@ -73,7 +80,11 @@ const router = createHashRouter([
       {
         path: 'records',
         element: <RecordsPage/>
-      }
+      },
+      {
+        path: 'scan',
+        element: <AiScan />
+      },
     ]
   },
   {

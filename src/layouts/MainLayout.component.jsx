@@ -1,32 +1,43 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Navbar from "../components/Navbar/Navbar.component"
 import "./MainLayout.style.css"
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom"
-import { selectUserId, selectUserRoleId } from "../redux/User/user.slice"
+import { selectUserId, selectUserRoleId, setUser } from "../redux/User/user.slice"
 import { useEffect, useState } from "react"
 import { getUserId, getUserRole } from "../utils"
 import { vDotService } from "../services/vDotService"
+import {useGetProfileMutation} from '../redux/Api/aiTbApi.slice.js'
 
 export const MainLayoutLoader = () => {
-  const user = getUserId()
+  const userId = getUserId()
   const userRole = getUserRole()
   return {
-    user, userRole
+    userId, userRole
   }
 }
 
 const MainLayout = () => {
-  const userId = useSelector(selectUserId)
+  const storeUserId = useSelector(selectUserId)
+  const [getProfile, {data: user, isLoading, isSuccess}] = useGetProfileMutation()
+  const dispatch = useDispatch()
   const [vDots, setVDots] = useState(new vDotService())
   const [meetingId, setMeetingId] = useState(null)
   const [target, setTarget] = useState({})
-  const {user, userRole} = useLoaderData()
+  const {userId, userRole} = useLoaderData()
   const navigate = useNavigate()
-  console.log(meetingId)
-  console.log(target)
-
+  console.log('user', user?.data.user)
   useEffect(() => {
-    if (!user) {
+    if (!storeUserId && userId) {
+      getProfile(userRole)
+    }
+  }, [])
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setUser(user.data.user))
+    }
+  }, [isSuccess])
+  useEffect(() => {
+    if (!userId) {
       navigate('/') 
     }
   }, [userId])
@@ -40,7 +51,7 @@ const MainLayout = () => {
   }, [meetingId])
 
   useEffect(() => {
-    vDots.setUser({id: user, role: userRole})
+    vDots.setUser({id: userId, role: userRole})
     vDots.openSocket(setMeetingId, setTarget)
   }, [])
 
