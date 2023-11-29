@@ -9,6 +9,9 @@ import DocterPage from './pages/DoctorPage/DocterPage.component.jsx'
 import ViewAllScans from './components/ViewAllScans/ViewAllScans.component.jsx'
 import AnalyticPage from './pages/Analytic/Analytic.component.jsx'
 
+import MapPage from "./pages/Map/MapPage.component.jsx";
+import DashboardPage from "./pages/Dashboard/DashboardPage.component.jsx";
+
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Tests from './components/Tests/Tests.component'
@@ -20,6 +23,11 @@ import CallPage from './pages/Call/CallPage.component.jsx'
 import AiScanPage from './pages/AiScan/AiScanPage.component.jsx'
 import AiScan from './components/AiScan/AiScan.component.jsx'
 import VideoCall from './pages/VideoCall/VideoCall.component.jsx'
+
+import RecordTablePage from "./pages/RecordTable/RecordTablePage.component.jsx"
+import RecordsPage from "./pages/Records/RecordsPage.component.jsx"
+// import 'leaflet/dist/leaflet.css'
+
 import ViewScan from './components/ViewScan/ViewScan.component.jsx'
 
 const router = createHashRouter([
@@ -62,6 +70,18 @@ const router = createHashRouter([
         element: <VideoCall />
       },
       {
+        path: 'nearby',
+        element: <MapPage/>
+      },
+      {
+        path: 'records/:recordId',
+        element: <RecordTablePage/>
+      },
+      {
+        path: 'records',
+        element: <RecordsPage/>
+      },
+      {
         path: 'scan',
         element: <AiScan />
       },
@@ -87,6 +107,10 @@ const router = createHashRouter([
       {
         path: 'patients/:patientId',
         element: <PatientProfilePage />
+      },
+      {
+        path: 'patients/:patientId/records',
+        element: <RecordsPage />
       },
       {
         path: 'appointments',
@@ -124,6 +148,42 @@ const router = createHashRouter([
       }
     ]
   },
+  {
+    path: '/call',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <CallPage/>
+      }
+    ]
+  },
+  {
+    path: '/nearby',
+    element: <MainLayout />,
+    loader: MainLayoutLoader,
+    children: [
+      {
+        index: true,
+        element: <MapPage/>
+      }
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: <MainLayout />,
+    loader: MainLayoutLoader,
+    children: [
+      {
+        index: true,
+        element: <DashboardPage/>
+      }
+    ]
+  },
+  {
+    path: '/codetests',
+    element: <Tests />
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

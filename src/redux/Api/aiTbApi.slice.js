@@ -88,11 +88,57 @@ export const aiTbApiSlice = createApi({
         }
       })
     }),
+    uploadXray: builder.mutation({
+      query: ({ dataURL }) => {
+        return {
+          url: `/images`,
+          method: 'POST',
+          body: {
+            img: dataURL
+          },
+          headers: {
+            authorization: `Bearer ${getUserAccessToken()}`,
+          }
+        }
+      }
+    }),
+    getClinics: builder.mutation({
+      query: ({country, city}) => ({
+        url: `/clinics?country=${country}&city=${city}`,
+        method: 'GET',
+      })
+    }),
+    getCountries: builder.query({
+      query: () => ({
+        url: `/countries`,
+        method: 'GET',
+        
+      })
+    }),
+    getRecords: builder.query({
+      query: ({ isDoctor, patientId }) => ({
+        url: isDoctor ? `/users/${patientId}/records` : `/myprofile/records/`,
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      })
+    }),
+    getOneRecord: builder.query({
+      query: ({recordId}) => ({
+        url: `/records/${recordId}`,
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      })
+    }),
   }),
 })
 
 export const { useGetPingQuery, useLoginMutation, useSignupMutation,
   useGetPatientsQuery, useGetCallLogsQuery, useCreateMedicationMutation,
   useTakeMedicationMutation,
-  useGetMedicationQuery, useGetProfileMutation
+  useGetMedicationQuery, useGetClinicsMutation, useGetCountriesQuery, useGetRecordsQuery, useGetOneRecordQuery,
+  useGetProfileMutation
 } = aiTbApiSlice
