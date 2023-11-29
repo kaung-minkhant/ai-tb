@@ -50,7 +50,7 @@ const router = createHashRouter([
         element: <ViewAllScans width='300px' />,
       },
       {
-        path: 'view-scan',
+        path: 'scanview-scan',
         element: <ViewScan />
       }, 
       {
@@ -145,7 +145,7 @@ const router = createHashRouter([
         element: <VideoCall />
       },
       {
-        path: 'view-scan',
+        path: 'scan/view-scan',
         element: <ViewScan />
       }, 
     ]
