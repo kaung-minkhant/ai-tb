@@ -82,8 +82,16 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
       return arr;
   };
   function getWeekData(medication) {
+    // console.log('medication', medication)
     if (!medication) return null
     const currentDate = new Date()
+    if (!medication.MedTrackers) {
+      return {
+        weekStatus: [],
+        startDate: new Date(),
+        endDate: new Date()
+      }
+    }
     const trackers = medication.MedTrackers
     const startDate = new Date(medication.startDate);
     const endDate = new Date(medication.endDate);

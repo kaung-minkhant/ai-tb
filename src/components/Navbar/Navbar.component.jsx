@@ -18,8 +18,6 @@ const Navbar = () => {
   const patientNav = {
     Profile: '/patient/profile',
     DashBoard: '/patient',
-    "View Scan History": '/patient/allscans',
-    "View Test Records": '/patient',
     Analysis: '/analytic',
   }
 

@@ -67,7 +67,6 @@ const PatientPage = () => {
           )
         }
       </div>
-      
       <div className="patient-page-near-clinics"></div>
     </div>
   )

@@ -113,6 +113,10 @@ const router = createHashRouter([
         element: <RecordsPage />
       },
       {
+        path: 'patients/:patientId/records/:recordId',
+        element: <RecordTablePage/>
+      },
+      {
         path: 'appointments',
         element: <DoctorAppointments />
       },
@@ -135,7 +139,7 @@ const router = createHashRouter([
       {
         path: 'call',
         element: <VideoCall />
-      }
+      },
     ]
   },
   {
