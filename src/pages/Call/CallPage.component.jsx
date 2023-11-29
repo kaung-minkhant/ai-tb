@@ -8,6 +8,7 @@ import PageHeading from '../../components/HelperComponents/PageHeading.component
 import { useState } from 'react';
 import Contacts from '../../components/ContactPageItems/Contacts.component';
 import CallLogs from '../../components/ContactPageItems/CallLogs.component';
+import { getUserRole } from '../../utils';
 
 
 const CallPage = ({ width='300px'}) => {
@@ -30,12 +31,12 @@ const CallPage = ({ width='300px'}) => {
       </div>
       <div className='call-body'>
         {
-          state === 'contact' && (
+          state === 'contact' && !(+getUserRole()===1) && (
             <Contacts />
           )
         }
         {
-          state === 'logs' && (
+          state === 'logs' && !(+getUserRole()===1) && (
             <CallLogs />
           )
         }

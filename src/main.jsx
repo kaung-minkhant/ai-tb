@@ -85,6 +85,10 @@ const router = createHashRouter([
         path: 'scan',
         element: <AiScan />
       },
+      {
+        path: 'calls',
+        element: <CallPage />
+      },
     ]
   },
   {
@@ -140,6 +144,10 @@ const router = createHashRouter([
         path: 'call',
         element: <VideoCall />
       },
+      {
+        path: 'view-scan',
+        element: <ViewScan />
+      }, 
     ]
   },
   {

@@ -49,7 +49,7 @@ const PatientPage = () => {
         <PageOption label="Appointments" width={85} onClick={() => handleClick('appointments')}>
           <AppointmentsSVG width={'50%'} />
         </PageOption>
-        <PageOption label="Call" width={85}>
+        <PageOption label="Call" width={85} onClick={() => navigate('calls')}>
           <CallSVG width={'50%'} />
         </PageOption>
       </div>

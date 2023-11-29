@@ -7,6 +7,7 @@ import {CameraIcon, ArrowUpTrayIcon} from '@heroicons/react/24/outline'
 import { useUploadXrayMutation } from '../../redux/Api/aiApi.slice'
 import { useMediaQuery } from '@uidotdev/usehooks'
 import { useNavigate } from 'react-router-dom'
+import { getUserRole } from '../../utils'
 
 const AiScan = () => {
   const [camera, _] = useState(new Camera)
@@ -23,7 +24,7 @@ const AiScan = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/patient/view-scan', {state: scanData})
+      navigate('view-scan', {state: scanData})
     }
   }, [isSuccess])
   const handleSave = () => {

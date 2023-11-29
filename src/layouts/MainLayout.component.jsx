@@ -30,7 +30,7 @@ const MainLayout = () => {
   useEffect(() => {
     if (!storeUserId && userId) {
       getProfile(userRole)
-      if (userRole === 1) {
+      if (+userRole === 1) {
         getDoctor()
       }
     }
