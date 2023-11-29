@@ -23,7 +23,8 @@ import CallPage from './pages/Call/CallPage.component.jsx'
 import AiScanPage from './pages/AiScan/AiScanPage.component.jsx'
 import AiScan from './components/AiScan/AiScan.component.jsx'
 import VideoCall from './pages/VideoCall/VideoCall.component.jsx'
-import RecordPage from "./pages/Records/RecordPage.component.jsx"
+import RecordTablePage from "./pages/RecordTable/RecordTablePage.component.jsx"
+import RecordsPage from "./pages/Records/RecordsPage.component.jsx"
 // import 'leaflet/dist/leaflet.css'
 
 const router = createHashRouter([
@@ -66,8 +67,12 @@ const router = createHashRouter([
         element: <MapPage/>
       },
       {
+        path: 'records/:recordId',
+        element: <RecordTablePage/>
+      },
+      {
         path: 'records',
-        element: <RecordPage/>
+        element: <RecordsPage/>
       }
     ]
   },
@@ -91,6 +96,10 @@ const router = createHashRouter([
       {
         path: 'patients/:patientId',
         element: <PatientProfilePage />
+      },
+      {
+        path: 'patients/:patientId/records',
+        element: <RecordsPage />
       },
       {
         path: 'appointments',

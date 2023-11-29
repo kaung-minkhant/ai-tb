@@ -106,11 +106,29 @@ export const aiTbApiSlice = createApi({
         
       })
     }),
+    getRecords: builder.query({
+      query: ({ isDoctor, patientId }) => ({
+        url: isDoctor ? `/users/${patientId}/records` : `/myprofile/records/`,
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      })
+    }),
+    getOneRecord: builder.query({
+      query: ({recordId}) => ({
+        url: `/records/${recordId}`,
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      })
+    }),
   }),
 })
 
 export const { useGetPingQuery, useLoginMutation, useSignupMutation, useUploadXrayMutation,
   useGetPatientsQuery, useGetCallLogsQuery, useCreateMedicationMutation,
   useTakeMedicationMutation,
-  useGetMedicationQuery, useGetClinicsMutation, useGetCountriesQuery
+  useGetMedicationQuery, useGetClinicsMutation, useGetCountriesQuery, useGetRecordsQuery, useGetOneRecordQuery
 } = aiTbApiSlice
