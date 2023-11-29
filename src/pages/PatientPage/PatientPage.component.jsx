@@ -33,11 +33,25 @@ const PatientPage = () => {
   }
 
 
-
+  //<ScanSVG width={ `${getWidth(30)}px` }/>
   return (
     <div className="patient-page">
       <div className="patient-page-title">
         <h2>Welcome, Phyo</h2>
+      </div>
+      <div className="patient-page-options">
+        <PageOption label="AI Scan" width={85} onClick={() => handleClick('ai-scan')}>
+          <ScanSVG width={ '50%' }/>
+        </PageOption>
+        <PageOption label="Test Results" width={85}>
+          <TestResultSVG width={ '50%' } />
+        </PageOption>
+        <PageOption label="Appointments" width={85} onClick={() => handleClick('appointments')}>
+          <AppointmentsSVG width={'50%'} />
+        </PageOption>
+        <PageOption label="Call" width={85}>
+          <CallSVG width={'50%'} />
+        </PageOption>
       </div>
       <div>
         {
@@ -52,20 +66,6 @@ const PatientPage = () => {
             <Calendar width={`${getWidth(200)}px`} />
           )
         }
-      </div>
-      <div className="patient-page-options">
-        <PageOption label="AI Scan" width={85} onClick={() => handleClick('ai-scan')}>
-          <ScanSVG width={ `${getWidth(70)}px` }/>
-        </PageOption>
-        <PageOption label="Test Results" width={85} onClick={() => navigate('records')}>
-          <TestResultSVG width={ `${getWidth(70)}px` } />
-        </PageOption>
-        <PageOption label="Appointments" width={85} onClick={() => handleClick('appointments')}>
-          <AppointmentsSVG width={`${getWidth(70)}px`} />
-        </PageOption>
-        <PageOption label="Call" width={85}>
-          <CallSVG width={`${getWidth(70)}px`} />
-        </PageOption>
       </div>
       <div className="patient-page-near-clinics"></div>
     </div>

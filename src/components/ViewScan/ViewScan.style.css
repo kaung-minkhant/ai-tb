@@ -44,6 +44,8 @@
 }
 
 .view-scan .prediction-result {
+  margin-bottom: 20px;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
 }

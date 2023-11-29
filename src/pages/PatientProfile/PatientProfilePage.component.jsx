@@ -45,7 +45,7 @@ const PatientProfilePage = () => {
         <Log name={'Soe Kyaw Moe'} id={'Caregiver'} icon={<UserIcon width={20}/>} />
       </div>
       <div className='patient-profile-med-info'>
-        <div>
+        <div className="med-info-gap">
           {
             medications.map(medication => {
               return (

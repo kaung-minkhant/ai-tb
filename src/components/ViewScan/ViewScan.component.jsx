@@ -26,8 +26,10 @@ const ViewScan = () => {
           <button className={`btn view-button ${view==='heatmap' ? 'selected' : ''}`} onClick={() => handleViewChange('heatmap')}>Heatmap</button>
         </div>
         <div className='prediction-view'>
-          <h2 className='prediction-title'>Prediction</h2>
+          <h2 className='prediction-title'>AI Prediction Result</h2>
           <p className='prediction-result'>{scanData.results}</p>
+        
+          <p className='prediction-result'>Positive Score: {scanData.score}</p>
         </div>
       </div>
       {/* <img className='scan-image original' src={scanData.original} alt='original scan' />

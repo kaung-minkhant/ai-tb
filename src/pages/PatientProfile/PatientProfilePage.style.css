@@ -1,4 +1,7 @@
 .patient-profile {
+  display: flex;  
+  flex-direction: column;
+  max-width: 98%;
 }
 
 
@@ -14,4 +17,10 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.med-info-gap {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
 }
