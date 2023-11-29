@@ -118,7 +118,9 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
   return (
     <div className="med-tracker" style={{"--tracker-width": `${getWidth(width)}px`}}>
       <div className='med-tracker-title'>{medication?.name} Intake</div>
-      <WeeklyTracker state={weekStatus} />
+      <div className='weekTrackerScroll'>
+        <WeeklyTracker state={weekStatus} />
+      </div>
       {
         !hideControl && (
           <div className="daily-med-info">
