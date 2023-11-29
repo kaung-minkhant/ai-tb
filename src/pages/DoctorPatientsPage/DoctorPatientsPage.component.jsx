@@ -18,7 +18,7 @@ const DoctorPatientsPage = () => {
       getPatients(patients.data.myPatients).then(details => {
         details.forEach(detail => {
           renderLogs.push(
-            <Log key={detail.data.userId} name={detail.data.firstName} id={detail.data.userId} icon={<UsersIcon width={25}/>} onClick={() => handleClick(detail.data.userId)}/>
+            <Log key={detail.data.userId} name={`${detail.data.firstName} ${detail.data.lastName}`} id={`Patient ID: ${detail.data.userId}`} icon={<UsersIcon width={25}/>} onClick={() => handleClick(detail.data.userId)}/>
           )
         })
         setRenders(renderLogs)

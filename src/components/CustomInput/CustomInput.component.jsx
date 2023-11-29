@@ -44,7 +44,7 @@ const CustomInput = ({saveValue = () => {}, setDisable=() => {}, icon, width="20
         )
       }
       <div className='input-container'>
-        <input type={type} value={value} placeholder='' onChange={e => handleChange(e)} onBlur={e => checkAfterChange(e.target.value)}/>
+        <input type={type} autoComplete={type === 'text' ? 'username' : 'current-password'} value={value} placeholder='' onChange={e => handleChange(e)} onBlur={e => checkAfterChange(e.target.value)}/>
         <label className='label'>{label}</label>
         {
           correct === null ? "" : correct ? "" : (

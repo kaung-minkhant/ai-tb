@@ -6,7 +6,7 @@ import { selectUserId, selectUserRoleId, setUser } from "../redux/User/user.slic
 import { useEffect, useState } from "react"
 import { getUserId, getUserRole } from "../utils"
 import { vDotService } from "../services/vDotService"
-import {useGetProfileMutation} from '../redux/Api/aiTbApi.slice.js'
+import {useGetDoctorMutation, useGetProfileMutation} from '../redux/Api/aiTbApi.slice.js'
 
 export const MainLayoutLoader = () => {
   const userId = getUserId()
@@ -19,23 +19,36 @@ export const MainLayoutLoader = () => {
 const MainLayout = () => {
   const storeUserId = useSelector(selectUserId)
   const [getProfile, {data: user, isLoading, isSuccess}] = useGetProfileMutation()
+  const [getDoctor, {data: doctor, isLoading: isDoctorLoading, isSuccess: isDoctorSuccess}] = useGetDoctorMutation()
   const dispatch = useDispatch()
   const [vDots, setVDots] = useState(new vDotService())
   const [meetingId, setMeetingId] = useState(null)
   const [target, setTarget] = useState({})
   const {userId, userRole} = useLoaderData()
   const navigate = useNavigate()
-  console.log('user', user?.data.user)
+  // console.log('user', user?.data.user)
   useEffect(() => {
     if (!storeUserId && userId) {
       getProfile(userRole)
+      if (userRole === 1) {
+        getDoctor()
+      }
     }
   }, [])
   useEffect(() => {
-    if (isSuccess) {
-      dispatch(setUser(user.data.user))
+    if (isSuccess && isDoctorSuccess) {
+      dispatch(setUser({
+        ...user.data.user,
+        doctorName: doctor.data.doctors.doctorName,
+        doctorId: doctor.data.doctors.doctorId
+      }))
     }
-  }, [isSuccess])
+  }, [isSuccess, isDoctorSuccess])
+  // useEffect(() => {
+  //   if (isDoctorSuccess) {
+  //     console.log('doctor', doctor.data.doctors)
+  //   }
+  // }, [isDoctorSuccess])
   useEffect(() => {
     if (!userId) {
       navigate('/') 

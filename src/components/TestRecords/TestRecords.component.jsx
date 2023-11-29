@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router'
 import './TestRecords.style.css'
 
 const TestRecord = ({date, test}) => {
@@ -13,7 +14,8 @@ const TestRecord = ({date, test}) => {
   )
 }
 
-const TestRecords = ({width='300px'}) => {
+const TestRecords = ({width='300px', patientId}) => {
+  const navigate = useNavigate()
   const recordData = [
     {
       date: new Date().toDateString(),
@@ -32,6 +34,14 @@ const TestRecords = ({width='300px'}) => {
       test: 'Lung X Ray Scan'
     },
   ]
+
+  const handleClick = (id) => {
+    if (id) {
+      navigate(`/doctor/patients/${id}/records`) 
+    } else {
+      navigate(`/patient/records`)
+    }
+  }
   return (
     <div className="test-records" style={{"--test-records-width": width}}>
       <div className='test-records-header'>
@@ -44,7 +54,7 @@ const TestRecords = ({width='300px'}) => {
           })
         }
       </div>
-      <div className='test-records-view-more'>
+      <div className='test-records-view-more' onClick={() => handleClick(patientId)}>
         View More Test Records
       </div>
     </div>

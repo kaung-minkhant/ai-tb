@@ -5,14 +5,17 @@ import MedicineTracker from '../../components/MedicineTracker/MedicineTracker.co
 import Log from '../../components/Log/Log.component.jsx'
 import {UserIcon} from '@heroicons/react/24/outline'
 import ProfileProfile from '../../components/HelperComponents/ProfileProfile.component'
-import { getWidth } from '../../utils.js'
+import { getUserRole, getWidth } from '../../utils.js'
 import Medications from '../../components/Medications/Medications.component.jsx'
 import { useParams } from 'react-router-dom'
 import { useCreateMedicationMutation, useGetMedicationQuery } from '../../redux/Api/aiTbApi.slice.js'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../redux/User/user.slice.js'
 
 const PatientProfilePage = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 650px)")
+  const user = useSelector(selectUser)
   const [medications, setMedications] = useState([])
   const {patientId} = useParams()
   const isDoctor = window.location.href.includes('doctor')
@@ -27,14 +30,18 @@ const PatientProfilePage = () => {
     }
   }, [isMedicationQuerySuccess])
 
-  console.log(medications)
+  // console.log(medications)
 
   return (
     <div className='patient-profile'>
       <ProfileProfile name='Phyo Wai Wai' imagePath='./images/patient_profile.png' />
       <div className='patient-profile-buttons'></div>
       <div className='patient-profile-cards'>
-        <Log name={'Dr Kyaw Kyaw Moe'} icon={<UserIcon width={20}/>} />
+        {
+          +getUserRole() !== 2 && (
+            <Log name={`Dr ${user.doctorName}`} id={`Doctor ID: ${user.doctorId}`} icon={<UserIcon width={20}/>} />
+          )
+        }
         <Log name={'Soe Kyaw Moe'} id={'Caregiver'} icon={<UserIcon width={20}/>} />
       </div>
       <div className='patient-profile-med-info'>
@@ -63,7 +70,7 @@ const PatientProfilePage = () => {
           />
         </div>
         <div>
-          <TestRecords width={`${getWidth(180)}px`} /> 
+          <TestRecords width={`${getWidth(180)}px`} patientId={patientId}/> 
         </div>
       </div>
     </div>

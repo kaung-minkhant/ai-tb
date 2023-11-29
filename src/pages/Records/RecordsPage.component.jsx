@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import Log from "../../components/Log/Log.component"
 import { useNavigate, useParams } from "react-router-dom"
 import { useGetRecordsQuery } from "../../redux/Api/aiTbApi.slice"
+import { getUser, getUserRole } from "../../utils"
 
 export const RecordsPageLoader = () => {
-    
     return null
 }
 
@@ -23,13 +23,15 @@ const RecordsPage = ({width = '300px'}) => {
 
     useEffect(() => {
         if (isSuccess) {
+          if (+getUserRole() === 2) {
+            setData(data.data.records.records)
+          } else {
             setData(data.data.records)
+          }
         }
     }, [isSuccess])
-
-    console.log('Data', data)
     const handleClick = (key) => {
-        navigate(`/patient/records/${key}`)
+      navigate(`${key}`)
     }
     return(
         <div className="records">

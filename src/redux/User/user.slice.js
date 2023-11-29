@@ -27,6 +27,8 @@ const userSlice = createSlice({
             race: userObj.race ?? null,
             roleId: userObj.roleId ?? null,
             id: userObj.userId ?? null,
+            doctorName: userObj.doctorName ?? null,
+            doctorId: userObj.doctorId ?? null,
           }
         }
       },
@@ -43,7 +45,7 @@ export const {setUser, logout} = userSlice.actions
 
 export default userSlice.reducer
 
-const selectUser = state => state.user
+export const selectUser = state => state.user
 
 export const selectUserId = createSelector(
   [selectUser],
