@@ -1,5 +1,5 @@
 import './MedicineTracker.style.css'
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid"
+import { CheckCircleIcon, XCircleIcon, MinusCircleIcon } from "@heroicons/react/24/solid"
 import Popup from 'reactjs-popup';
 import Calendar from '../Calendar/Calendar.component'
 import { getWidth } from '../../utils';
@@ -14,6 +14,8 @@ const DayCheckBox = ({size=30, state='', label}) => {
     stateIcon = <XCircleIcon color="red" />
   } else if (state === 'YES') {
     stateIcon = <CheckCircleIcon color="green"/>
+  } else if (state === 'OUTSIDE') {
+    stateIcon = <MinusCircleIcon color="grey" />
   }
   return (
     <div style={{
@@ -133,7 +135,7 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
       }
       if (padding === 'left') {
         for (let index = 0; index < paddingLength; index++) {
-          weekStatus.unshift('NOT_YET')
+          weekStatus.unshift('OUTSIDE')
         }
       }
     }

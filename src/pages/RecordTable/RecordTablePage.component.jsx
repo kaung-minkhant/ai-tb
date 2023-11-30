@@ -3,6 +3,8 @@ import { useMediaQuery } from "@uidotdev/usehooks"
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from "react-router-dom"
 import {useGetOneRecordQuery} from "../../redux/Api/aiTbApi.slice"
+import axios from "axios"
+import { getUserAccessToken } from "../../utils"
 
 export const RecordTablePageLoader = () =>{
     return null
@@ -26,6 +28,21 @@ const RecordTablePage = ( {width='300px'}) =>{
     console.log('isSuccess', isSuccess)
     console.log('data', data?.data.record)
     console.log('Data', Data)
+
+    const handleDownload = async () => {
+      const response = await axios.get(`${import.meta.env.VITE_URL}/records/${recordId}?download=true`, {
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      })
+      let file = new Blob([response.data], {type: 'text/plain'})
+      const fileName = 'hl7 file.txt'
+      const link = document.getElementById('hl7-link')
+      link.setAttribute('href', window.URL.createObjectURL(file))
+      link.setAttribute('download', fileName)
+      link.click()
+      console.log(response.data)
+    }
     if (!data){
         return (<h1>LOADING</h1>)
     }
@@ -75,8 +92,8 @@ const RecordTablePage = ( {width='300px'}) =>{
                     </tbody>
                 </table>
             </div>
-
-            <div className="btns">Download HL7</div>
+            <a id={'hl7-link'} style={{display: 'none'}}></a>
+            <div className="btn" onClick={handleDownload}>Download HL7</div>
         </div>
     )
 }
