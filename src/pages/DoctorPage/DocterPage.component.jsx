@@ -17,16 +17,16 @@ const DocterPage = () => {
       </div>
       <div className='doctor-page-options'>
         <PageOption label="AI Scan" onClick={() => handleClick('ai-scan')} width={85}>
-          <ScanSVG width={`${getWidth(70)}px`} />
+          <ScanSVG width={'50%'} />
         </PageOption>
         <PageOption label="Patients" onClick={() => handleClick('patients')} width={85}>
-          <UsersSVG width={`${getWidth(70)}px`} />
+          <UsersSVG width={'50%'} />
         </PageOption>
         <PageOption label="Appointments" onClick={() => handleClick('appointments')} width={85}>
-          <AppointmentsSVG width={`${getWidth(70)}px`} />
+          <AppointmentsSVG width={'50%'} />
         </PageOption>
         <PageOption label="Call" onClick={() => handleClick('calls')} width={85}>
-          <CallSVG width={`${getWidth(70)}px`} />
+          <CallSVG width={'50%'} />
         </PageOption>
       </div>
     </div>

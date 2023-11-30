@@ -20,7 +20,8 @@
 }
 
 .sidebar.mobile.show {
-  width: var(--sidebar-width);
+  /*width: var(--sidebar-width);*/
+  width: 100%;
 }
 
 .sidebar .navbar-profile {
