@@ -29,6 +29,7 @@ import RecordsPage from "./pages/Records/RecordsPage.component.jsx"
 // import 'leaflet/dist/leaflet.css'
 
 import ViewScan from './components/ViewScan/ViewScan.component.jsx'
+import { Toaster } from 'react-hot-toast'
 
 const router = createHashRouter([
   {
@@ -88,6 +89,10 @@ const router = createHashRouter([
       {
         path: 'calls',
         element: <CallPage />
+      },
+      {
+        path: 'nearby',
+        element: <MapPage/>
       },
     ]
   },
@@ -162,27 +167,6 @@ const router = createHashRouter([
     ]
   },
   {
-    path: '/call',
-    element: <MainLayout />,
-    children: [
-      {
-        index: true,
-        element: <CallPage/>
-      }
-    ]
-  },
-  {
-    path: '/nearby',
-    element: <MainLayout />,
-    loader: MainLayoutLoader,
-    children: [
-      {
-        index: true,
-        element: <MapPage/>
-      }
-    ]
-  },
-  {
     path: '/dashboard',
     element: <MainLayout />,
     loader: MainLayoutLoader,
@@ -201,6 +185,7 @@ const router = createHashRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
+    <Toaster />
     <RouterProvider router={router}>
     </RouterProvider>
   </Provider>

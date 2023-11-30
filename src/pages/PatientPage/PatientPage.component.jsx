@@ -67,7 +67,12 @@ const PatientPage = () => {
           )
         }
       </div>
-      <div className="patient-page-near-clinics"></div>
+      <div className="patient-page-near-clinics">
+        <div className="nearby-image">
+          <img src="./images/find_clinic_map.png" />
+        </div>
+        <button className="btn" onClick={() => navigate('nearby')}>Find nearby Clinic!</button>
+      </div>
     </div>
   )
 }
