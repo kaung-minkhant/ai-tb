@@ -103,7 +103,7 @@ const Navbar = ({userRole}) => {
                   height: '100%',
                 }} src='./images/patient_profile.png' /> 
               </div>
-              <span className='profile-name'>A Chit Layy</span>
+              <span className='profile-name'>Kaung Min</span>
             </div>
             {
               isMobile && (

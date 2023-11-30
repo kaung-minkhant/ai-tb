@@ -96,6 +96,7 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
     const startDate = new Date(medication.startDate);
     const endDate = new Date(medication.endDate);
     const daysArray = getDaysArray(startDate, endDate)
+    console.log(daysArray)
     const statusArray = new Array(daysArray.length).fill("NOT_YET")
     daysArray.forEach((day, index) => {
       const trackerDay = trackers?.filter(tracker => new Date(tracker.doseTime).toDateString() === day )
@@ -113,9 +114,29 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
     const currentDay = currentDate.getDay() 
     let weekStartIndex = currentIndex - currentDay
     let weekEndIndex = currentIndex + (6 - currentDay)
-    if (weekStartIndex < 0) weekStartIndex = 0
-    if (weekEndIndex > daysArray.length - 1) weekEndIndex = daysArray.length - 1
-    const weekStatus = statusArray.slice(weekStartIndex, weekEndIndex+1)
+    let padding = null;
+    if (weekStartIndex < 0) {
+      weekStartIndex = 0
+      padding = 'left';
+    }
+    if (weekEndIndex > daysArray.length - 1) {
+      weekEndIndex = daysArray.length - 1
+      padding = 'right';
+    }
+    let weekStatus = statusArray.slice(weekStartIndex, weekEndIndex+1)
+    let paddingLength = 7 - weekStatus.length
+    if (paddingLength > 0) {
+      if (padding === 'right') {
+        for (let index = 0; index < paddingLength; index++) {
+          weekStatus.push('NOT_YET')
+        }
+      }
+      if (padding === 'left') {
+        for (let index = 0; index < paddingLength; index++) {
+          weekStatus.unshift('NOT_YET')
+        }
+      }
+    }
     return {
       weekStatus: weekStatus,
       startDate: startDate,
