@@ -153,6 +153,7 @@ const router = createHashRouter([
   {
     path: '/analytic',
     element: <MainLayout />,
+    loader: MainLayoutLoader,
     children: [
       {
         index: true,

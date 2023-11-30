@@ -70,7 +70,7 @@ const MainLayout = () => {
 
   return (
     <div className="main-layout">
-      <Navbar/>
+      <Navbar userRole={userRole}/>
       <div className="main-content">
         <Outlet context={[vDots, meetingId, setMeetingId]}/>
       </div>

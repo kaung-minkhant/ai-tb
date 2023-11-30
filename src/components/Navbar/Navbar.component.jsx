@@ -7,7 +7,7 @@ import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/solid'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/User/user.slice'
 
-const Navbar = () => {
+const Navbar = ({userRole}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [item, setItem] = useState(0)
@@ -60,15 +60,13 @@ const Navbar = () => {
     person = 'doctor'
   }
 
-  if (person === 'patient') {
+  if (+userRole === 1) {
     navItems = Object.keys(patientNav);
     navPaths = Object.values(patientNav);
-  } else if (person === 'doctor') {
+  } else if (+userRole === 2) {
     navItems = Object.keys(doctorNav)
     navPaths = Object.values(doctorNav)
   }
-
-
 
   navItems.forEach((navItem, index) => {
     let regex;
