@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar/Navbar.component"
 import "./MainLayout.style.css"
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom"
 import { selectUserId, selectUserRoleId, setUser } from "../redux/User/user.slice"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { getUserId, getUserRole } from "../utils"
 import { vDotService } from "../services/vDotService"
 import {useGetDoctorMutation, useGetProfileMutation} from '../redux/Api/aiTbApi.slice.js'
@@ -25,9 +25,11 @@ const MainLayout = () => {
   const [vDots, setVDots] = useState(new vDotService())
   const [meetingId, setMeetingId] = useState(null)
   const [target, setTarget] = useState({})
+  const targetRef = useRef(null)
   const [ownPeer, setOwnPeer] = useState(new Peer(undefined,{
-    host: '52.221.188.235',
-    port: 8082,
+    host: 'd3han8ue9ryj52.cloudfront.net',
+    // port: 8082,
+    secure: true,
     path: '/peerjs/myapp',
   }))
   const {userId, userRole} = useLoaderData()
@@ -52,6 +54,7 @@ const MainLayout = () => {
       console.log('incoming peer connection!');
       conn.on('data', (data) => {
         setTarget(JSON.parse(data))
+        targetRef.current = JSON.parse(data)
         console.log(`received: ${data}`);
       });
       conn.on('open', () => {
@@ -59,13 +62,14 @@ const MainLayout = () => {
       });
     });
     ownPeer.on('call', (call) => {
+      console.log('target',targetRef.current)
       if (!target.inCall) {
-        navigate(`/patient/call?callerId=${getUserId()}&callerRole=${getUserRole()}&recId=${target.targetId}&recRole=${target.targetRole}&incall=true`)
+        navigate(`/patient/call?callerId=${getUserId()}&callerRole=${getUserRole()}&recId=${targetRef.current.targetId}&recRole=${targetRef.current.targetRole}&incall=true`)
       }
       console.log('being called')
       navigator.mediaDevices.getUserMedia({video: true, audio: true})
         .then((stream) => {
-          if (confirm('accept?')) {
+          // if (confirm('accept?')) {
             call.answer(stream); // Answer the call with an A/V stream.
             call.on('stream', (stream) => {
               const receiver = document.getElementById('receiver-video')
@@ -75,7 +79,7 @@ const MainLayout = () => {
             call.on('close', () => {
               navigate(-1)
             })
-          }
+          // }
         })
         .catch((err) => {
           console.error('Failed to get local stream', err);
