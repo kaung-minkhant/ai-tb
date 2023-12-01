@@ -3,3 +3,19 @@
   flex-direction: column;
   align-items: center;
 }
+
+.vdots .video-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vdots #receiver-vider {
+  display: none
+}
+
+.vdots video {
+  transform: rotateY(180deg) scaleY(1);
+}

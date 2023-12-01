@@ -5,6 +5,7 @@ export class vDotService {
     #connectionId = null
     #isOpen = false
 
+
     // getter and setters
     setUser = ({id, role}) => {
       this.#userId = id
@@ -12,7 +13,7 @@ export class vDotService {
     }
 
     // open connection
-    openSocket = (setMeetingId, setCaller) => {
+    openSocket = (setMeetingId, setCaller, peerId="") => {
         if (!this.#isOpen) {
             console.log("opening");
             this.#websocket = new WebSocket(import.meta.env.VITE_NOTIFICATION_SOCKET_URL)
@@ -21,7 +22,8 @@ export class vDotService {
                 this.#websocket.send(JSON.stringify({
                     action: 'register',
                     userId: this.#userId,
-                    userRole: this.#userRole
+                    userRole: this.#userRole,
+                    peerId: peerId,
                 }))
                 this.#websocket.onmessage = (event) => {
                     const data = JSON.parse(event.data)

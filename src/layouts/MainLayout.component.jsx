@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { getUserId, getUserRole } from "../utils"
 import { vDotService } from "../services/vDotService"
 import {useGetDoctorMutation, useGetProfileMutation} from '../redux/Api/aiTbApi.slice.js'
+import "../services/peer.min.js"
 
 export const MainLayoutLoader = () => {
   const userId = getUserId()
@@ -24,6 +25,11 @@ const MainLayout = () => {
   const [vDots, setVDots] = useState(new vDotService())
   const [meetingId, setMeetingId] = useState(null)
   const [target, setTarget] = useState({})
+  const [ownPeer, setOwnPeer] = useState(new Peer(undefined,{
+    host: '52.221.188.235',
+    port: 8082,
+    path: '/peerjs/myapp',
+  }))
   const {userId, userRole} = useLoaderData()
   const navigate = useNavigate()
   // console.log('user', user?.data.user)
@@ -34,6 +40,47 @@ const MainLayout = () => {
         getDoctor()
       }
     }
+    vDots.setUser({id: userId, role: userRole})
+    ownPeer.on('open', (id) => {
+      console.log('My peer ID is: ' + id)
+      vDots.openSocket(setMeetingId, setTarget, id)
+    });
+    ownPeer.on('error', (error) => {
+      console.log('My peer error is: ' + error)
+    });
+    ownPeer.on('connection', (conn) => {
+      console.log('incoming peer connection!');
+      conn.on('data', (data) => {
+        setTarget(JSON.parse(data))
+        console.log(`received: ${data}`);
+      });
+      conn.on('open', () => {
+        conn.send('hello!');
+      });
+    });
+    ownPeer.on('call', (call) => {
+      if (!target.inCall) {
+        navigate(`/patient/call?callerId=${getUserId()}&callerRole=${getUserRole()}&recId=${target.targetId}&recRole=${target.targetRole}&incall=true`)
+      }
+      console.log('being called')
+      navigator.mediaDevices.getUserMedia({video: true, audio: true})
+        .then((stream) => {
+          if (confirm('accept?')) {
+            call.answer(stream); // Answer the call with an A/V stream.
+            call.on('stream', (stream) => {
+              const receiver = document.getElementById('receiver-video')
+              receiver.style.display = 'block';
+              receiver.srcObject = stream
+            });
+            call.on('close', () => {
+              navigate(-1)
+            })
+          }
+        })
+        .catch((err) => {
+          console.error('Failed to get local stream', err);
+        });
+    });
   }, [])
   useEffect(() => {
     if (isSuccess && isDoctorSuccess) {
@@ -55,24 +102,22 @@ const MainLayout = () => {
     }
   }, [userId])
 
-  useEffect(() => {
-    if (meetingId) {
-      if (+userRole === 1) {
-        navigate(`/patient/call?callerId=${getUserId()}&callerRole=${getUserRole()}&recId=${target.targetId}&recRole=${target.targetRole}`)
-      }
-    }
-  }, [meetingId])
+  // useEffect(() => {
+  //   if (meetingId) {
+  //     if (+userRole === 1) {
+  //       navigate(`/patient/call?callerId=${getUserId()}&callerRole=${getUserRole()}&recId=${target.targetId}&recRole=${target.targetRole}`)
+  //     }
+  //   }
+  // }, [meetingId])
 
-  useEffect(() => {
-    vDots.setUser({id: userId, role: userRole})
-    vDots.openSocket(setMeetingId, setTarget)
-  }, [])
+  // useEffect(() => {
+  // }, [])
 
   return (
     <div className="main-layout">
       <Navbar userRole={userRole}/>
       <div className="main-content">
-        <Outlet context={[vDots, meetingId, setMeetingId]}/>
+        <Outlet context={[vDots, meetingId, setMeetingId, ownPeer, target]}/>
       </div>
     </div>
   )
