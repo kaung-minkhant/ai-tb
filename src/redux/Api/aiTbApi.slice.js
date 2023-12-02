@@ -4,6 +4,7 @@ import { getUserAccessToken } from "../../utils";
 export const aiTbApiSlice = createApi({
   reducerPath: 'ai_tb',
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_URL }),
+  tagTypes: ['medTrackers'],
   endpoints: builder => ({
     getPing: builder.query({
       query: () => '/'
@@ -83,7 +84,8 @@ export const aiTbApiSlice = createApi({
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`
         }
-      })
+      }),
+      providesTags: ['medTrackers']
     }),
     takeMedication: builder.mutation({
       query: (medId) => ({
@@ -95,7 +97,8 @@ export const aiTbApiSlice = createApi({
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`
         }
-      })
+      }),
+      invalidatesTags: ['medTrackers']
     }),
     uploadXray: builder.mutation({
       query: ({ dataURL }) => {

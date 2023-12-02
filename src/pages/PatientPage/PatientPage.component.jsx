@@ -81,7 +81,7 @@ const PatientPage = () => {
                 {
                   medications.map(medication => {
                     return (
-                      <MedicineTracker medication={medication} key={medication.medicationId} width={180} isMobile={isMobile}  />
+                      <MedicineTracker medication={medication} key={medication.medicationId} width={180} isMobile={isMobile} isDoctor={false} patientId={null} />
                     )
                   })
                 }

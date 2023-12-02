@@ -7,7 +7,7 @@ import {UserIcon} from '@heroicons/react/24/outline'
 import ProfileProfile from '../../components/HelperComponents/ProfileProfile.component'
 import { getUserRole, getWidth } from '../../utils.js'
 import Medications from '../../components/Medications/Medications.component.jsx'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useCreateMedicationMutation, useGetMedicationQuery } from '../../redux/Api/aiTbApi.slice.js'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -17,6 +17,7 @@ const PatientProfilePage = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 650px)")
   const user = useSelector(selectUser)
   const username = useSelector(selectUserName)
+  const {state} = useLocation()
   const [medications, setMedications] = useState([])
   const {patientId} = useParams()
   const isDoctor = window.location.href.includes('doctor')
@@ -35,7 +36,7 @@ const PatientProfilePage = () => {
 
   return (
     <div className='patient-profile'>
-      <ProfileProfile name={username} imagePath='./images/patient_profile.png' />
+      <ProfileProfile name={ state.userId ? `${state.firstName} ${state.lastName}` : username} imagePath='./images/patient_profile.png' />
       
       <div className="grids-container">
         <div className="left-grid">
@@ -57,7 +58,7 @@ const PatientProfilePage = () => {
             {
               medications.map(medication => {
                 return (
-                  <MedicineTracker medication={medication} key={medication.medicationId} width={180} isMobile={isMobile} hideControl={true} />
+                  <MedicineTracker medication={medication} key={medication.medicationId} width={180} isMobile={isMobile} hideControl={true} isDoctor={isDoctor} patientId={patientId}/>
                 )
               })
             }

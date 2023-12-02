@@ -89,7 +89,6 @@ const VideoCall = () => {
       setTimeout(() => resolve(), 1000)
     })
     callRef.current = ownPeer.call(targetPeerId, ownCamera.getStream())
-    // here is me
     callRef.current.on('stream', (stream) => {
       console.log('answered')
       otherCamera.setStream(stream);

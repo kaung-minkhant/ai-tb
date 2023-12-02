@@ -3,8 +3,8 @@ import { CheckCircleIcon, XCircleIcon, MinusCircleIcon } from "@heroicons/react/
 import Popup from 'reactjs-popup';
 import Calendar from '../Calendar/Calendar.component'
 import { getWidth } from '../../utils';
-import { useTakeMedicationMutation } from '../../redux/Api/aiTbApi.slice';
-import { useEffect } from 'react';
+import { useGetMedicationQuery, useTakeMedicationMutation } from '../../redux/Api/aiTbApi.slice';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const DayCheckBox = ({size=30, state='', label}) => {
@@ -62,17 +62,22 @@ const WeeklyTracker = ({state}) => {
   )
 }
 
-const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=false}) => {
+const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=false, isDoctor, patientId}) => {
   const navigate = useNavigate()
   const [takeMedication, {isSuccess: isTakeMedicationMutationSuccess}] = useTakeMedicationMutation()
+  const [weeklyStatus, setWeeklyStatus] = useState(getWeekData(medication))
 
   useEffect(() => {
     if (isTakeMedicationMutationSuccess) {
-      navigate(0) 
+      const newData = [...weeklyStatus.weekStatus]
+      newData[weeklyStatus.currentDateIndex] = 'YES'
+      setWeeklyStatus({
+        ...weeklyStatus,
+        weekStatus: newData
+      })
     }
   }, [isTakeMedicationMutationSuccess])
-  const {weekStatus} = getWeekData(medication)
-  console.log('week', weekStatus)
+  console.log('week', weeklyStatus)
 
   const handleTakeMed = () => {
     takeMedication(medication.medicationId)
@@ -83,25 +88,49 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
       }
       return arr;
   };
+
+  function addPadding(total, input, direction) {
+    const output = [...input]
+    let paddingLength = total - input.length
+    if (paddingLength > 0) {
+      if (direction === 'right') {
+        for (let index = 0; index < paddingLength; index++) {
+          output.push('NOT_YET')
+        }
+      }
+      if (direction === 'left') {
+        for (let index = 0; index < paddingLength; index++) {
+          output.unshift('OUTSIDE')
+        }
+      }
+    }
+    return output
+  }
+
   function getWeekData(medication) {
     // console.log('medication', medication)
     if (!medication) return null
     const currentDate = new Date()
-    if (!medication.MedTrackers) {
-      return {
-        weekStatus: [],
-        startDate: new Date(),
-        endDate: new Date()
-      }
-    }
-    const trackers = medication.MedTrackers
+    // if (!medication.MedTrackers) {
+    //   return {
+    //     weekStatus: [],
+    //     startDate: new Date(),
+    //     endDate: new Date()
+    //   }
+    // }
+    const trackers = medication.MedTrackers ?? 0;
     const startDate = new Date(medication.startDate);
     const endDate = new Date(medication.endDate);
     const daysArray = getDaysArray(startDate, endDate)
     console.log(daysArray)
     const statusArray = new Array(daysArray.length).fill("NOT_YET")
     daysArray.forEach((day, index) => {
-      const trackerDay = trackers?.filter(tracker => new Date(tracker.doseTime).toDateString() === day )
+      let trackerDay;
+      if (!trackers) {
+        trackerDay = []
+      } else {
+        trackerDay = trackers?.filter(tracker => new Date(tracker.doseTime).toDateString() === day )
+      }
       if (trackerDay.length === 0 ) {
         if (new Date(day) < currentDate) {
           statusArray[index] = 'NO'
@@ -126,23 +155,12 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
       padding = 'right';
     }
     let weekStatus = statusArray.slice(weekStartIndex, weekEndIndex+1)
-    let paddingLength = 7 - weekStatus.length
-    if (paddingLength > 0) {
-      if (padding === 'right') {
-        for (let index = 0; index < paddingLength; index++) {
-          weekStatus.push('NOT_YET')
-        }
-      }
-      if (padding === 'left') {
-        for (let index = 0; index < paddingLength; index++) {
-          weekStatus.unshift('OUTSIDE')
-        }
-      }
-    }
+    weekStatus = addPadding(7, weekStatus, padding)
     return {
       weekStatus: weekStatus,
       startDate: startDate,
-      endDate: endDate
+      endDate: endDate,
+      currentDateIndex: currentIndex,
     }
   }
 
@@ -150,7 +168,7 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
     <div className="med-tracker" style={{"--tracker-width": `${getWidth(width)}px`}}>
       <div className='med-tracker-title'>&#128138; {medication?.name}</div>
       <div className='weekTrackerScroll'>
-        <WeeklyTracker state={weekStatus} />
+        <WeeklyTracker state={weeklyStatus.weekStatus} />
       </div>
       {
         !hideControl && (

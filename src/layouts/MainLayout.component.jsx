@@ -113,12 +113,20 @@ const MainLayout = () => {
     });
   }, [])
   useEffect(() => {
-    if (isSuccess && isDoctorSuccess) {
-      dispatch(setUser({
-        ...user.data.user,
-        doctorName: doctor.data.doctors.doctorName,
-        doctorId: doctor.data.doctors.doctorId
-      }))
+    if (isSuccess) {
+      if (+userRole === 1) {
+        if (isDoctorSuccess) {
+          dispatch(setUser({
+            ...user.data.user,
+            doctorName: doctor.data.doctors.doctorName,
+            doctorId: doctor.data.doctors.doctorId
+          }))
+        }
+      } else {
+        dispatch(setUser({
+          ...user.data.user,
+        }))
+      }
     }
   }, [isSuccess, isDoctorSuccess])
   // useEffect(() => {
