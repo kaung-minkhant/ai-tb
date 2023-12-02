@@ -157,6 +157,10 @@ const router = createHashRouter([
         path: 'scan/view-scan',
         element: <ViewScan />
       }, 
+      {
+        path: 'dashboard',
+        element: <DashboardPage/>
+      }
     ]
   },
   {
