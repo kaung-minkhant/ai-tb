@@ -8,7 +8,9 @@
 .patient-page .patient-page-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-items: center;
+  justify-items: flex-end;
+  align-items: space-between;
+  gap: 19px;
   gap: 1rem;
   padding: 0;
 }
@@ -18,6 +20,23 @@
   font-weight: 800;
   font-size: 1.5rem;
   text-align: left;
+  padding-left: 20px;
+}
+
+.med-info-container{
+  width: 85vw;
+  max-width: 310px;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 1.3rem;
+  /* background-color: rgb(123, 235, 222); */
+}
+
+.med-info{
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px 0 15px 0
 }
 
 .patient-page .patient-page-title h2 {
@@ -33,7 +52,7 @@
 
 .patient-page .patient-page-near-clinics {
   position: relative;
-  width: 270px;
+  width: 78%;
   height: 200px;
   border: 2px solid black;
   border-radius: 1rem;
@@ -44,7 +63,7 @@
 .patient-page .nearby-image {
   object-fit: contain;
   overflow: hidden;
-  width: 270px;
+  width: 100%;
   height: 200px;
   border-radius: 1rem;
 }

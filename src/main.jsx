@@ -94,6 +94,10 @@ const router = createHashRouter([
         path: 'nearby',
         element: <MapPage/>
       },
+      {
+        path: 'dashboard',
+        element: <DashboardPage/>
+      }
     ]
   },
   {

@@ -61,7 +61,7 @@ const Map = ({Data}) => {
             <h3>{clinic.name}</h3>
             <h4>Address: {clinic.address}</h4>
             <h4>Doctor: {clinic.doctor}</h4>
-            <h5>Contact: {clinic.phone}</h5>
+            <h4>Contact: {clinic.phone}</h4>
           </Popup>
         </Marker>
       ))}

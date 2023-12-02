@@ -41,19 +41,20 @@ const PatientPage = () => {
       </div>
       <div className="patient-page-options">
         <PageOption label="AI Scan" width={85} onClick={() => handleClick('ai-scan')}>
-          <ScanSVG width={ '50%' }/>
+          <ScanSVG width={ '61%' }/>
         </PageOption>
         <PageOption label="Test Results" width={85} onClick={() => navigate('records')}>
-          <TestResultSVG width={ '50%' } />
+          <TestResultSVG width={ '61%' } />
         </PageOption>
         <PageOption label="Appointments" width={85} onClick={() => handleClick('appointments')}>
-          <AppointmentsSVG width={'50%'} />
+          <AppointmentsSVG width={'61%'} />
         </PageOption>
         <PageOption label="Call" width={85} onClick={() => navigate('calls')}>
-          <CallSVG width={'50%'} />
+          <CallSVG width={'61%'} />
         </PageOption>
       </div>
-      <div>
+      <div className="med-info-container">
+        <div className="med-info">Your Medications</div>
         {
           medications.map(medication => {
             return (
@@ -63,7 +64,7 @@ const PatientPage = () => {
         }
         {
           !isMobile && (
-            <Calendar width={`${getWidth(200)}px`} />
+            <Calendar width={`99%`} />
           )
         }
       </div>
@@ -71,7 +72,7 @@ const PatientPage = () => {
         <div className="nearby-image">
           <img src="./images/find_clinic_map.png" />
         </div>
-        <button className="btn" onClick={() => navigate('nearby')}>Find nearby Clinic!</button>
+        <button className="btn" onClick={() => navigate('nearby')}>Find nearby Clinics</button>
       </div>
     </div>
   )
