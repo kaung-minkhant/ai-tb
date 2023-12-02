@@ -24,36 +24,66 @@ ChartJS.register(
 
 
 
-const BarChart = () =>{
+const BarChart = ({title, labelsArr, xLegend, dataArr, bC, bW}) =>{
 
     const options = {
+        maintainAspectRatio: false,
         responsive: true,
+        scales:{
+          y:{
+            ticks:{
+              font: {
+                size: 13,
+                weight: 'bold'
+              }
+            }
+          },
+          x:{
+            ticks:{
+              font: {
+                size: 13,
+                weight: 'bold'
+              }
+            }
+          }
+        },
         plugins: {
           legend: {
-            position: 'top',
+            position: 'bottom',
+            labels: {
+              font:{
+                size: 16,
+                weight: 'bold'
+              }
+            }
           },
           title: {
-            display: true,
-            text: 'Chart.js Bar Chart',
+            display: false,
+            position: 'bottom',
+            text: title,
+            labels: {
+              font:{
+                size: 15
+              }
+            }
           },
+          
         },
       };
       
-      const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+      const labels = labelsArr;
       
       const data = {
         labels,
         datasets: [
           {
-            label: 'Dataset 1',
-            data: labels.map(() => 10),
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-          },
-          {
-            label: 'Dataset 2',
-            data: labels.map(() =>100),
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-          },
+            label: xLegend,
+            data: dataArr,
+            backgroundColor: bC,
+            // borderWidth: bW,
+            barThickness: 20,
+            borderColor: 'rgba(0,0,0,0)'
+          }
         ],
       };
 

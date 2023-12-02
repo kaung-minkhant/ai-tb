@@ -1,0 +1,69 @@
+.dash-page{
+    display: flex;
+    flex: 0.8;
+    flex-direction: column;
+    width: 98%;
+}
+
+.Grids{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 40px;
+    overflow: auto;
+    height: 95%;
+}
+.main-bar-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.main-bar-container h1{
+    margin: 5px;
+}
+
+.analysis{
+    width: 45%;
+    font-size: 10px;
+    margin-bottom: 5px;
+    place-self: flex-end;
+}
+
+.analysis-text{
+    margin: 0;
+    font-size: 1rem
+}
+
+.dash-page-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 40px
+}
+
+.chart-container{
+    display: flex;
+    flex: 1;
+    max-height: 30vh;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 1.3rem;
+
+}
+
+@media (max-width: 870px) {
+    .Grids{
+        flex-direction: column;
+    }
+    .main-bar-container{
+        flex-direction: column;
+    }
+
+    .analysis{
+        width:100%
+    }
+}
