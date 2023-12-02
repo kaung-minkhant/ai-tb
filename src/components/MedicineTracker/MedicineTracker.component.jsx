@@ -160,7 +160,7 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
       weekStatus: weekStatus,
       startDate: startDate,
       endDate: endDate,
-      currentDateIndex: currentIndex,
+      currentDateIndex: currentDay,
     }
   }
 
