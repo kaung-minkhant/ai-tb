@@ -4,12 +4,13 @@ import './Navbar.style.css'
 import { useState } from 'react'
 import { useMediaQuery } from '@uidotdev/usehooks'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/solid'
-import { useDispatch } from 'react-redux'
-import { logout } from '../../redux/User/user.slice'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout, selectUserName } from '../../redux/User/user.slice'
 
 const Navbar = ({userRole}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const username = useSelector(selectUserName)
   const [item, setItem] = useState(0)
   const isMobile = useMediaQuery("only screen and (max-width: 650px)")
   const [showSideBar, setShowSideBar] = useState(false)
@@ -18,6 +19,10 @@ const Navbar = ({userRole}) => {
   const patientNav = {
     Profile: '/patient/profile',
     DashBoard: '/patient',
+    Appointments: '/patient/appointments',
+    'AI Scan': '/patient/ai-scan',
+    'Test Records': '/patient/records',
+    Calls: '/patient/calls',
     Analysis: '/analytic',
   }
 
@@ -103,7 +108,7 @@ const Navbar = ({userRole}) => {
                   height: '100%',
                 }} src='./images/patient_profile.png' /> 
               </div>
-              <span className='profile-name'>Kaung Min</span>
+              <span className='profile-name'>{username}</span>
             </div>
             {
               isMobile && (

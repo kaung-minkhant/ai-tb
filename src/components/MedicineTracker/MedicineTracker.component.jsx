@@ -180,13 +180,30 @@ const MedicineTracker = ({medication, width=180 , isMobile = false, hideControl=
             <div className='view-med-calendar'>
               View Calendar
             </div>
-          } modal>
-            <div style={{
-              backgroundColor: 'white',
-              borderRadius: '1rem',
-            }}>
-              <Calendar />
+          } 
+          modal
+          >
+            {
+              close => (
+                <div style={{
+                  backgroundColor: 'white',
+                  borderRadius: '1rem',
+                }}>
+                  <div style={{
+                    padding: '1rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    border: '2px solid black',
+                    borderRadius: '1rem',
+                  }}>
+                    <Calendar />
+                    <button onClick={() => close()} className='btn'>Close</button>
+                  </div>
             </div>
+              )
+            }
           </Popup>
         )
       }

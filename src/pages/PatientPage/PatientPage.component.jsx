@@ -48,16 +48,16 @@ const PatientPage = () => {
             
             <div className="patient-page-options">
               <PageOption label="AI Scan" width={85} onClick={() => handleClick('ai-scan')}>
-                <ScanSVG width={ '61%' }/>
+                <ScanSVG width={ '50%' }/>
               </PageOption>
               <PageOption label="Test Results" width={85} onClick={() => navigate('records')}>
-                <TestResultSVG width={ '61%' } />
+                <TestResultSVG width={ '50%' } />
               </PageOption>
               <PageOption label="Appointments" width={85} onClick={() => handleClick('appointments')}>
-                <AppointmentsSVG width={'61%'} />
+                <AppointmentsSVG width={'50%'} />
               </PageOption>
               <PageOption label="Call" width={85} onClick={() => navigate('calls')}>
-                <CallSVG width={'61%'} />
+                <CallSVG width={'50%'} />
               </PageOption>
             </div>
 

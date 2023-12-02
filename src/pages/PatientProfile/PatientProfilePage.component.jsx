@@ -11,11 +11,12 @@ import { useParams } from 'react-router-dom'
 import { useCreateMedicationMutation, useGetMedicationQuery } from '../../redux/Api/aiTbApi.slice.js'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../redux/User/user.slice.js'
+import { selectUser, selectUserName } from '../../redux/User/user.slice.js'
 
 const PatientProfilePage = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 650px)")
   const user = useSelector(selectUser)
+  const username = useSelector(selectUserName)
   const [medications, setMedications] = useState([])
   const {patientId} = useParams()
   const isDoctor = window.location.href.includes('doctor')
@@ -34,7 +35,7 @@ const PatientProfilePage = () => {
 
   return (
     <div className='patient-profile'>
-      <ProfileProfile name='Phyo Wai Wai' imagePath='./images/patient_profile.png' />
+      <ProfileProfile name={username} imagePath='./images/patient_profile.png' />
       
       <div className="grids-container">
         <div className="left-grid">

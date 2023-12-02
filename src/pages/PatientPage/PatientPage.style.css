@@ -11,8 +11,9 @@
   grid-template-columns: 1fr 1fr;
   justify-items: flex-end;
   align-items: space-between;
-  gap: 19px;
-  gap: 1rem;
+  width: 80%;
+  /* gap: 19px; */
+  gap: 0.5rem;
   padding: 0;
 }
 
@@ -22,20 +23,22 @@
   font-size: 1.5rem;
   text-align: left;
   padding: 0px 0 0px 0px;
-  margin-bottom: 30px;
+  /* margin-bottom: 10px; */
 }
 
-.greeting{
+.patient-page .greeting{
   font-size: 1.3rem;
   padding: 0;
   margin: 5px 0 5px 0;
 }
 
-.med-info-container{
+.patient-page .med-info-container{
+  position: relative;
   width: 85vw;
   max-width: 310px;
   border: 2px solid black;
   padding: 10px;
+  padding-top: 0;
   border-radius: 1.3rem;
   max-height: 90vh;
   overflow-y: scroll;
@@ -49,11 +52,17 @@
   display: none;
 }
 
-.med-info{
+.patient-page .med-info{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #e8e9eb;
+  border-bottom: 2px solid black;
   text-align: center;
   font-size: 25px;
   font-weight: bold;
-  margin: 10px 0 15px 0
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .patient-page .patient-page-title h2 {
@@ -96,7 +105,7 @@
   transform: translate(-50%, -50%);
 }
 
-.grids-container{
+.patient-page .grids-container{
   display: flex;
   flex-direction: row;
   gap: 30px;
@@ -104,7 +113,7 @@
   width: 100%;
 }
 
-.left-grid{
+.patient-page .left-grid{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -113,7 +122,7 @@
   gap: 15px;
 }
 
-.right-grid{
+.patient-page .right-grid{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -126,8 +135,9 @@
   .patient-page {
     flex-direction: column;
   }
-  .grids-container{
+  .patient-page .grids-container{
     flex-direction: column;
+    gap: 1rem;
   }
 
   .patient-page .patient-page-near-clinics {
@@ -136,6 +146,9 @@
   
   .patient-page .patient-page-title {
     margin-bottom: 10px;
+  }
+  .patient-page .patient-page-title {
+    text-align: center;
   }
 
 }

@@ -52,6 +52,11 @@ export const selectUserId = createSelector(
   user => user.id
 )
 
+export const selectUserName = createSelector(
+  [selectUser],
+  user => `${user.firstName} ${user.lastName}`
+)
+
 export const selectUserRoleId = createSelector(
   [selectUser],
   user => user.roleId
