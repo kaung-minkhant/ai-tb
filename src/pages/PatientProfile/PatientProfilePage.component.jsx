@@ -35,44 +35,64 @@ const PatientProfilePage = () => {
   return (
     <div className='patient-profile'>
       <ProfileProfile name='Phyo Wai Wai' imagePath='./images/patient_profile.png' />
-      <div className='patient-profile-buttons'></div>
-      <div className='patient-profile-cards'>
-        {
-          +getUserRole() !== 2 && (
-            <Log name={`Dr ${user.doctorName}`} id={`Doctor ID: ${user.doctorId}`} icon={<UserIcon width={20}/>} />
-          )
-        }
-        <Log name={'Soe Kyaw Moe'} id={'Caregiver'} icon={<UserIcon width={20}/>} />
-      </div>
-      <div className='patient-profile-med-info'>
-        <div className="med-info-gap">
-          {
-            medications.map(medication => {
-              return (
-                <MedicineTracker medication={medication} key={medication.medicationId} width={180} isMobile={isMobile} hideControl={true} />
+      
+      <div className="grids-container">
+        <div className="left-grid">
+          {/* <div className='patient-profile-buttons'></div> */}
+            <div className='patient-profile-cards'>
+              {
+                +getUserRole() !== 2 && (
+                  <div className='doctor-container'>
+                    <h5 className='doctor-title'>Your Doctor</h5>
+                    <Log name={`Dr ${user.doctorName}`} id={`Doctor ID: ${user.doctorId}`} icon={<UserIcon width={20}/>} />
+                  </div>
+                )
+              }
+              {/* <Log name={'Soe Kyaw Moe'} id={'Caregiver'} icon={<UserIcon width={20}/>} /> */}
+          </div>
+
+          <div className="med-info-gap">
+            <h5 className='doctor-title'>Medication History</h5>
+            {
+              medications.map(medication => {
+                return (
+                  <MedicineTracker medication={medication} key={medication.medicationId} width={180} isMobile={isMobile} hideControl={true} />
+                )
+              })
+            }
+            {/* {
+              !isMobile && (
+                <Calendar width="300px" />
               )
-            })
-          }
-          {/* {
-            !isMobile && (
-              <Calendar width="300px" />
-            )
-          } */}
+            } */}
+          </div>
         </div>
-        <div>
-          <Medications 
-            medications={medications} 
-            isSuccess={isMedicationQuerySuccess} 
-            isMutationSuccess={isMedicationMutationSuccess} 
-            isDoctor={isDoctor}
-            createMedication={createMedication}
-            patientId={patientId}
-          />
+        <div className="right-grid">
+
+            
+        <div className='patient-profile-med-info'>
+        
+          <div>
+            <Medications 
+              medications={medications} 
+              isSuccess={isMedicationQuerySuccess} 
+              isMutationSuccess={isMedicationMutationSuccess} 
+              isDoctor={isDoctor}
+              createMedication={createMedication}
+              patientId={patientId}
+            />
+          </div>
+            <div>
+              <TestRecords width={`${getWidth(180)}px`} patientId={patientId}/> 
+            </div>
+          </div>
+        
+        
         </div>
-        <div>
-          <TestRecords width={`${getWidth(180)}px`} patientId={patientId}/> 
-        </div>
+
       </div>
+      
+      
     </div>
   )
 }

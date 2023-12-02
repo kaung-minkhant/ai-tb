@@ -35,17 +35,55 @@ const PatientPage = () => {
 
   //<ScanSVG width={ `${getWidth(30)}px` }/>
   
-  
-  return  (
+  {
+    return (isMobile)?(
       <div className="patient-page">
+        <div className="patient-page-title">
+          <h2>Welcome, Phyo</h2>
+        </div>
+        <div className="patient-page-options">
+          <PageOption label="AI Scan" width={85} onClick={() => handleClick('ai-scan')}>
+            <ScanSVG width={ '61%' }/>
+          </PageOption>
+          <PageOption label="Test Results" width={85} onClick={() => navigate('records')}>
+            <TestResultSVG width={ '61%' } />
+          </PageOption>
+          <PageOption label="Appointments" width={85} onClick={() => handleClick('appointments')}>
+            <AppointmentsSVG width={'61%'} />
+          </PageOption>
+          <PageOption label="Call" width={85} onClick={() => navigate('calls')}>
+            <CallSVG width={'61%'} />
+          </PageOption>
+        </div>
+        <div className="med-info-container">
+          <div className="med-info">Your Medications</div>
+          {
+            medications.map(medication => {
+              return (
+                <MedicineTracker medication={medication} key={medication.medicationId} width={180} isMobile={isMobile}  />
+              )
+            })
+          }
+          {
+            !isMobile && (
+              <Calendar width={`99%`} />
+            )
+          }
+        </div>
+        <div className="patient-page-near-clinics">
+          <div className="nearby-image">
+            <img src="./images/find_clinic_map.png" />
+          </div>
+          <button className="btn" onClick={() => navigate('nearby')}>Find nearby Clinics</button>
+        </div>
+      </div>
+    ): (
+      <div className="patient-page">
+        <div className="patient-page-title">
+          <h2>Welcome, Phyo</h2>
+        </div>
         <div className="grids-container">
           <div className="left-grid">
-            <div className="patient-page-title">
-              <h2>Welcome, Phyo</h2>
-              <h4 className="greeting">How are you today? </h4>
-            </div>
-
-            
             <div className="patient-page-options">
               <PageOption label="AI Scan" width={85} onClick={() => handleClick('ai-scan')}>
                 <ScanSVG width={ '61%' }/>
@@ -61,19 +99,12 @@ const PatientPage = () => {
               </PageOption>
             </div>
 
-        
-            {
-              !isMobile && (
-                <div className="patient-page-near-clinics">
-                  <div className="nearby-image">
-                    <img src="./images/find_clinic_map.png" />
-                  </div>
-                  <button className="btn" onClick={() => navigate('nearby')}>Find nearby Clinics</button>
-                </div>
-              )
-            }
-            
-
+            <div className="patient-page-near-clinics">
+              <div className="nearby-image">
+                <img src="./images/find_clinic_map.png" />
+              </div>
+              <button className="btn" onClick={() => navigate('nearby')}>Find nearby Clinics</button>
+            </div>
           </div>
           <div className="right-grid">
             <div className="med-info-container">
@@ -91,24 +122,15 @@ const PatientPage = () => {
                   )
                 }
             </div>
-
-            {
-              isMobile && (
-                <div className="patient-page-near-clinics">
-                  <div className="nearby-image">
-                    <img src="./images/find_clinic_map.png" />
-                  </div>
-                  <button className="btn" onClick={() => navigate('nearby')}>Find nearby Clinics</button>
-                </div>
-              )
-            }
           </div> 
 
         </div>
    
       </div>
     )
-      
+  }
+    
+  
 }
 
 export default PatientPage

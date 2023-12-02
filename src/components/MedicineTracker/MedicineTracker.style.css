@@ -10,15 +10,16 @@
   align-items: center;
   box-sizing: border-box;
   margin: 10px 0 10px 0;
+  overflow: hidden;
 }
 
 .med-tracker .med-tracker-title {
   width: 100%;
   text-align: center;
-  padding: 0.8rem 0rem;
+  padding: 0.8rem 1rem 0.8rem 0rem;
   font-weight: 800;
   font-size: 1.5rem;
-  border-bottom: 1.5px solid black;
+  border-bottom: 2px solid black;
 }
 
 .med-tracker .daily-med-info {

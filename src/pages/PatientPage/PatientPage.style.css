@@ -3,12 +3,15 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  flex:0.8;
 }
 
 .patient-page .patient-page-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-items: center;
+  justify-items: flex-end;
+  align-items: space-between;
+  gap: 19px;
   gap: 1rem;
   padding: 0;
 }
@@ -18,6 +21,39 @@
   font-weight: 800;
   font-size: 1.5rem;
   text-align: left;
+  padding: 0px 0 0px 0px;
+  margin-bottom: 30px;
+}
+
+.greeting{
+  font-size: 1.3rem;
+  padding: 0;
+  margin: 5px 0 5px 0;
+}
+
+.med-info-container{
+  width: 85vw;
+  max-width: 310px;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 1.3rem;
+  max-height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  /* background-color: rgb(123, 235, 222); */
+}
+
+.med-info-container::-webkit-scrollbar {
+  display: none;
+}
+
+.med-info{
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px 0 15px 0
 }
 
 .patient-page .patient-page-title h2 {
@@ -33,7 +69,7 @@
 
 .patient-page .patient-page-near-clinics {
   position: relative;
-  width: 270px;
+  width: 80%;
   height: 200px;
   border: 2px solid black;
   border-radius: 1rem;
@@ -44,7 +80,7 @@
 .patient-page .nearby-image {
   object-fit: contain;
   overflow: hidden;
-  width: 270px;
+  width: 100%;
   height: 200px;
   border-radius: 1rem;
 }
@@ -60,8 +96,46 @@
   transform: translate(-50%, -50%);
 }
 
+.grids-container{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  flex: 1;
+  width: 100%;
+}
+
+.left-grid{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex:1;
+  gap: 15px;
+}
+
+.right-grid{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+  gap: 15px;
+}
+
 @media (max-width: 870px) {
   .patient-page {
     flex-direction: column;
   }
+  .grids-container{
+    flex-direction: column;
+  }
+
+  .patient-page .patient-page-near-clinics {
+    width: 98%
+  }
+  
+  .patient-page .patient-page-title {
+    margin-bottom: 10px;
+  }
+
 }
