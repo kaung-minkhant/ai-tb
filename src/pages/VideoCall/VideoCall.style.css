@@ -2,14 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  outline: 1px dotted blue;
 }
 
-.vdots .video-list {
+.vdots #video-list {
+  height: 400px;
   margin-top: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
+  outline: 1px solid red;
 }
 
 .vdots #receiver-video {
@@ -17,5 +21,8 @@
 }
 
 .vdots video {
-  transform: rotateY(180deg) scaleY(1);
+  /*position: absolute;*/
+  outline: 2px solid green;
+  /*height: fit-content;*/
+  
 }

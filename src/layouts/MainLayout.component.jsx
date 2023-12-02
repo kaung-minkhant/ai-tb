@@ -8,6 +8,8 @@ import { getUserId, getUserRole } from "../utils"
 import { vDotService } from "../services/vDotService"
 import {useGetDoctorMutation, useGetProfileMutation} from '../redux/Api/aiTbApi.slice.js'
 import "../services/peer.min.js"
+import Camera from '../components/Tests/Video.js'
+import { useMediaQuery } from '@uidotdev/usehooks'
 
 export const MainLayoutLoader = () => {
   const userId = getUserId()
@@ -22,10 +24,13 @@ const MainLayout = () => {
   const [getProfile, {data: user, isLoading, isSuccess}] = useGetProfileMutation()
   const [getDoctor, {data: doctor, isLoading: isDoctorLoading, isSuccess: isDoctorSuccess}] = useGetDoctorMutation()
   const dispatch = useDispatch()
+  const isMobile = useMediaQuery("only screen and (max-width : 650px)")
   const [vDots, setVDots] = useState(new vDotService())
   const [meetingId, setMeetingId] = useState(null)
   const [target, setTarget] = useState({})
   const targetRef = useRef(null)
+  const [ownCamera, setOwnCamera] = useState(new Camera())
+  const [call, setCall] = useState(null)
   const [ownPeer, setOwnPeer] = useState(new Peer(undefined,{
     host: 'd3han8ue9ryj52.cloudfront.net',
     // port: 8082,
@@ -45,6 +50,7 @@ const MainLayout = () => {
     vDots.setUser({id: userId, role: userRole})
     ownPeer.on('open', (id) => {
       console.log('My peer ID is: ' + id)
+      alert(`hiii my id is ${id}`)
       vDots.openSocket(setMeetingId, setTarget, id)
     });
     ownPeer.on('error', (error) => {
@@ -62,28 +68,48 @@ const MainLayout = () => {
       });
     });
     ownPeer.on('call', (call) => {
+      setCall(call)
       console.log('target',targetRef.current)
+      
       if (!target.inCall) {
         navigate(`/patient/call?callerId=${getUserId()}&callerRole=${getUserRole()}&recId=${targetRef.current.targetId}&recRole=${targetRef.current.targetRole}&incall=true`)
       }
       console.log('being called')
-      navigator.mediaDevices.getUserMedia({video: true, audio: true})
-        .then((stream) => {
-          // if (confirm('accept?')) {
-            call.answer(stream); // Answer the call with an A/V stream.
-            call.on('stream', (stream) => {
-              const receiver = document.getElementById('receiver-video')
-              receiver.style.display = 'block';
-              receiver.srcObject = stream
-            });
-            call.on('close', () => {
-              navigate(-1)
-            })
-          // }
-        })
-        .catch((err) => {
-          console.error('Failed to get local stream', err);
-        });
+      // navigator.mediaDevices.getUserMedia({video: true, audio: true})
+      //   .then(stream => {
+      //       call.answer(stream)
+      //   })
+      // if (isMobile) {
+      //   ownCamera.startCamera(400, 400, 'video-list', 'own-video', false, true)
+      // } else {
+      //   ownCamera.startCamera(300, 240, 'video-list', 'own-video', false)
+      // }
+      // i am here
+      // call.answer(otherCamera.getStream())
+      // call.on('stream', (stream) => {
+      //   if (isMobile) {
+      //     otherCamera.startCamera(400, 400, 'video-list', 'other-video', false, true)
+      //   } else {
+      //     otherCamera.startCamera(300, 240, 'video-list', 'other-video', false)
+      // }
+      // })
+      // navigator.mediaDevices.getUserMedia({video: true, audio: true})
+      //   .then((stream) => {
+      //     // if (confirm('accept?')) {
+      //       call.answer(stream); // Answer the call with an A/V stream.
+      //       call.on('stream', (stream) => {
+      //         const receiver = document.getElementById('receiver-video')
+      //         receiver.style.display = 'block';
+      //         receiver.srcObject = stream
+      //       });
+      //       call.on('close', () => {
+      //         navigate(-1)
+      // //       })
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.error('Failed to get local stream', err);
+      //   });
     });
   }, [])
   useEffect(() => {
@@ -121,7 +147,7 @@ const MainLayout = () => {
     <div className="main-layout">
       <Navbar userRole={userRole}/>
       <div className="main-content">
-        <Outlet context={[vDots, meetingId, setMeetingId, ownPeer, target]}/>
+        <Outlet context={[vDots, meetingId, setMeetingId, ownPeer, target, call]}/>
       </div>
     </div>
   )
