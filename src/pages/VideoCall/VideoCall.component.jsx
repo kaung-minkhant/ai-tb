@@ -31,7 +31,7 @@ const VideoCall = () => {
 
   useEffect(() => {
     if (isMobile) {
-      camera.startCamera(300, 400, 'video-list', true)
+      camera.startCamera(400, 400, 'video-list', true)
     } else {
       camera.startCamera(300, 240, 'video-list')
     }

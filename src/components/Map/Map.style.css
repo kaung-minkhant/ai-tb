@@ -1,0 +1,29 @@
+.notice-title{
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 90px black;
+}
+
+.title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+    overflow: hidden;
+    background-image: url("./images/find_clinic_map.png")
+}
+
+
+.nearby-image {
+  object-fit: contain;
+  overflow: hidden;
+  flex:1;
+}
+
+.nearby-image img {
+    
+  width: 100%;
+  height: 100%;
+}

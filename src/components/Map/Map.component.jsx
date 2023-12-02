@@ -21,7 +21,11 @@ const Map = ({Data}) => {
   }, [Data]);
   console.log('center', center)
   if (!Data) {
-    return <h1>Loading</h1>;
+    
+    return (
+    <div className="title-container background-tint">
+      <h1 className="notice-title">Please select your desired location in the dropdowns above.</h1>
+    </div>);
   }
 
   function SetViewOnClick({ coords }) {
@@ -34,7 +38,7 @@ const Map = ({Data}) => {
   return (
 
     <MapContainer center={center} 
-            zoom={13} 
+            zoom={10} 
             scrollWheelZoom={false}
             doubleClickZoom = {false}
             style={{ height: '100%', width: '100%' }}
@@ -55,6 +59,7 @@ const Map = ({Data}) => {
         <Marker key={index} position={[clinic.lat, clinic.long]}>
           <Popup>
             <h3>{clinic.name}</h3>
+            <h4>Address: {clinic.address}</h4>
             <h4>Doctor: {clinic.doctor}</h4>
             <h5>Contact: {clinic.phone}</h5>
           </Popup>
