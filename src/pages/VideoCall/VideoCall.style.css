@@ -13,16 +13,19 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 }
 
-.vdots #receiver-video {
-  display: none
-}
 
 .vdots video {
   /*position: absolute;*/
-  outline: 2px solid green;
+  /* outline: 2px solid green; */
   /*height: fit-content;*/
   
+}
+
+@media (max-width: 650px) {
+  .vdots #video-list {
+    flex-direction: column;
+  }
 }

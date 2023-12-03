@@ -124,8 +124,8 @@ const VideoCall = () => {
       </div>
       <div>
         <div id="video-list">
-          <video></video>
-          <video></video>
+          {/* <video></video>
+          <video></video> */}
         </div>
       </div>
     </div>
