@@ -42,8 +42,8 @@ export const aiTbApiSlice = createApi({
       })
     }),
     getPatients: builder.query({
-      query: () => ({
-        url: '/myprofile/mypatients',
+      query: ({role}) => ({
+        url: +role === 2 ? '/myprofile/mypatients' : '/myprofile/mydoctors',
         method: 'GET',
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`
@@ -54,6 +54,20 @@ export const aiTbApiSlice = createApi({
       query: () => ({
         url: `/myprofile/calls`,
         method: 'GET',
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      })
+    }),
+    createCallLog: builder.mutation({
+      query: ({doctorId, patientId}) =>({
+        url: '/calls',
+        method: 'POST',
+        body: {
+          doctorId: doctorId,
+          patientId: patientId,
+          caregiverId: '',
+        },
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`
         }
@@ -161,5 +175,5 @@ export const { useGetPingQuery, useLoginMutation, useSignupMutation,
   useGetPatientsQuery, useGetCallLogsQuery, useCreateMedicationMutation,
   useTakeMedicationMutation,
   useGetMedicationQuery, useGetClinicsMutation, useGetCountriesQuery, useGetRecordsQuery, useGetOneRecordQuery,
-  useGetProfileMutation, useGetDoctorMutation, useGetAllDataQuery
+  useGetProfileMutation, useGetDoctorMutation, useGetAllDataQuery, useCreateCallLogMutation
 } = aiTbApiSlice

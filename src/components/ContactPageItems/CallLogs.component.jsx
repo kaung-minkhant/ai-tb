@@ -4,21 +4,30 @@ import {UserIcon, PhoneArrowDownLeftIcon, PhoneArrowUpRightIcon, PhoneXMarkIcon}
 import { useGetCallLogsQuery } from '../../redux/Api/aiTbApi.slice'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { getUserAccessToken } from '../../utils'
+import { getUserAccessToken, getUserRole } from '../../utils'
 
 const CallLog = ({date, logs}) => {
   const [renders, setRenders] = useState([])
-  console.log(logs)
+  console.log('logs', logs)
   useEffect(() => {
     const renderLogs = []
-    getPatients(logs).then(details => {
-      details.forEach((detail, index) => {
+    if (+getUserRole() === 2) {
+      getPatients(logs).then(details => {
+        details.forEach((detail, index) => {
+          renderLogs.push(
+            <Log key={logs[index].callLogId} name={`${detail.data.firstName} ${detail.data.lastName}`} id={detail.data.phone} icon={<UserIcon width={25}/>} />
+          )
+        })
+        setRenders(renderLogs)
+      })
+    } else {
+      logs.forEach(log => {
         renderLogs.push(
-          <Log key={logs[index].callLogId} name={`${detail.data.firstName} ${detail.data.lastName}`} id={detail.data.phone} icon={<UserIcon width={25}/>} />
+          <Log key={log.callLogId} name={log.doctorName} id={log.doctorPhone} icon={<UserIcon width={25}/>} />
         )
       })
       setRenders(renderLogs)
-    })
+    }
   }, [])
   const getPatients = async (patients) => {
     const patientDetails = []

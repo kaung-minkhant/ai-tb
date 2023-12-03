@@ -6,6 +6,8 @@ import './VideoCall.style.css'
 import Camera from '../../components/Tests/Video.js'
 import axios from "axios"
 import { useMediaQuery } from '@uidotdev/usehooks'
+import { useCreateCallLogMutation } from "../../redux/Api/aiTbApi.slice.js"
+import { getUserRole } from "../../utils.js"
 
 const VideoCall = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 650px)")
@@ -14,6 +16,7 @@ const VideoCall = () => {
   const navigate = useNavigate()
   // const [meetingId, setMeetingId] = useState(null)
   const [vDots, meetingId, setMeetingId, ownPeer, target, call] = useOutletContext()
+  const [createCallLog, {data: log, isSuccess, isLoading}] = useCreateCallLogMutation()
   // const [meetingService, setMeetingService] = useState(new MeetingService())
   const [targetPeerId, setTargetPeerId] = useState(null)
   const [ownCamera, setOwnCamera] = useState(new Camera)
@@ -78,6 +81,8 @@ const VideoCall = () => {
     // conn.on('data', (data) => {
     //   console.log(`received: ${data}`);
     // });
+    const role = +getUserRole()
+    createCallLog({doctorId: role === 2 ? callerId : recId, patientId: role === 2 ? recId : callerId}) 
     conn.on('open',  () => {
       conn.send(JSON.stringify({
         targetId: recId,

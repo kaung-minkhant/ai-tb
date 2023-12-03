@@ -50,7 +50,7 @@ const MainLayout = () => {
     vDots.setUser({id: userId, role: userRole})
     ownPeer.on('open', (id) => {
       console.log('My peer ID is: ' + id)
-      alert(`hiii my id is ${id}`)
+      // alert(`hiii my id is ${id}`)
       vDots.openSocket(setMeetingId, setTarget, id)
     });
     ownPeer.on('error', (error) => {

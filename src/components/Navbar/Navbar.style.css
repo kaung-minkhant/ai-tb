@@ -5,7 +5,7 @@
   left: 0;
   width: 200px;
   height: 100vh;
-  z-index: 9;
+  z-index: 99;
   background-color: white;
   overflow-x: hidden;
   border-right: 2px solid black;

@@ -9,7 +9,7 @@ import { getUserAccessToken } from '../../utils'
 import { useNavigate } from 'react-router-dom'
 
 const DoctorPatientsPage = () => {
-  const {data: patients, isLoading, isSuccess} = useGetPatientsQuery()
+  const {data: patients, isLoading, isSuccess} = useGetPatientsQuery({role: 2})
   const [renders, setRenders] = useState([])
   const navigate = useNavigate()
   useEffect(() => {
