@@ -8,6 +8,8 @@ import { getWidth } from "../../utils.js"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useGetMedicationQuery } from "../../redux/Api/aiTbApi.slice.js"
+import { useSelector } from "react-redux"
+import { selectUserName } from "../../redux/User/user.slice.js"
 
 export const PatientPageLoader = () => {
   return null
@@ -15,6 +17,7 @@ export const PatientPageLoader = () => {
 
 const PatientPage = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 650px)")
+  const userName = useSelector(selectUserName)
   const [medications, setMedications] = useState([])
   const {data: medication, isLoading, isSuccess: isMedicationQuerySuccess} = useGetMedicationQuery({
     isDoctor: false,
@@ -41,7 +44,7 @@ const PatientPage = () => {
         <div className="grids-container">
           <div className="left-grid">
             <div className="patient-page-title">
-              <h2>Welcome, Phyo</h2>
+              <h2>Welcome, {userName}</h2>
               <h4 className="greeting">How are you today? </h4>
             </div>
 

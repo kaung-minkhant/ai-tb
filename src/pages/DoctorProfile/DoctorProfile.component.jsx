@@ -1,11 +1,14 @@
 import './DoctorProfile.style.css'
 import ProfileProfile from '../../components/HelperComponents/ProfileProfile.component'
 import InfoBox from '../../components/HelperComponents/InfoBox.component'
+import { useSelector } from 'react-redux'
+import { selectUserName } from '../../redux/User/user.slice'
 
 const DoctorProfile = () => {
+  const doctorName = useSelector(selectUserName)
   return (
     <div className='doctor-profile'>
-      <ProfileProfile name='Dr Kyaw Kyaw Moe' imagePath='./images/patient_profile.png' />
+      <ProfileProfile name={'Dr' + ' ' + doctorName} imagePath='./images/patient_profile.png' />
       <div className='doctor-profile-buttons'></div>
       <div className='doctor-info'>
         <InfoBox label='Background' text={"Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. "} />

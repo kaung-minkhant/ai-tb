@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './CustomInput.style.css'
 import { CheckCircleIcon, XCircleIcon} from '@heroicons/react/24/outline'
 
-const CustomInput = ({saveValue = () => {}, setDisable=() => {}, icon, width="200px", fontSize="1rem", invalidMessage, label, validator=null, type='text'}) => {
+const CustomInput = ({saveValue = () => {}, autoComplete = true, setDisable=() => {}, icon, width="200px", fontSize="1rem", invalidMessage="", label, validator=null, type='text'}) => {
   const [correct, setCorrect] = useState(null)
   const [value, setValue] = useState("")
   useEffect(() => {
@@ -45,7 +45,7 @@ const CustomInput = ({saveValue = () => {}, setDisable=() => {}, icon, width="20
         )
       }
       <div className='input-container'>
-        <input type={type} autoComplete={type === 'text' ? 'username' : 'current-password'} value={value} placeholder='' onChange={e => handleChange(e)}/>
+        <input type={type} autoComplete={autoComplete ? (type === 'text' ? 'username' : 'current-password') : ""} value={value} placeholder='' onChange={e => handleChange(e)}/>
         <label className='label'>{label}</label>
         {
           correct === null ? "" : correct ? "" : (

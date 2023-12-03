@@ -4,7 +4,7 @@ import { getUserAccessToken } from "../../utils";
 export const aiTbApiSlice = createApi({
   reducerPath: 'ai_tb',
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_URL }),
-  tagTypes: ['medTrackers'],
+  tagTypes: ['medTrackers', 'profile'],
   endpoints: builder => ({
     getPing: builder.query({
       query: () => '/'
@@ -23,6 +23,17 @@ export const aiTbApiSlice = createApi({
         body: credentials,
       })
     }),
+    updateProfile: builder.mutation({
+      query: body => ({
+        url: '/myprofile',
+        method: 'PATCH',
+        body: body,
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      }),
+      invalidatesTags: ['profile']
+    }),
     getProfile: builder.mutation({
       query: role => ({
         url: '/myprofile',
@@ -30,7 +41,8 @@ export const aiTbApiSlice = createApi({
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`
         }
-      })
+      }),
+      providesTags: ['profile']
     }),
     getDoctor: builder.mutation({
       query: () => ({
@@ -175,5 +187,6 @@ export const { useGetPingQuery, useLoginMutation, useSignupMutation,
   useGetPatientsQuery, useGetCallLogsQuery, useCreateMedicationMutation,
   useTakeMedicationMutation,
   useGetMedicationQuery, useGetClinicsMutation, useGetCountriesQuery, useGetRecordsQuery, useGetOneRecordQuery,
-  useGetProfileMutation, useGetDoctorMutation, useGetAllDataQuery, useCreateCallLogMutation
+  useGetProfileMutation, useGetDoctorMutation, useGetAllDataQuery, useCreateCallLogMutation,
+  useUpdateProfileMutation
 } = aiTbApiSlice

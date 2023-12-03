@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { deleteUser, deleteUserAccessToken, deleteUserRole, getWidth } from '../../utils'
+import { deleteUser, deleteUserAccessToken, deleteUserRole, getWidth, removeStorageValue } from '../../utils'
 import './Navbar.style.css'
 import { useState } from 'react'
 import { useMediaQuery } from '@uidotdev/usehooks'
@@ -43,6 +43,7 @@ const Navbar = ({userRole}) => {
     deleteUser()
     deleteUserAccessToken()
     deleteUserRole()
+    removeStorageValue('firstName')
     navigate('/')
   }
   const handleOnClick = (index) => {

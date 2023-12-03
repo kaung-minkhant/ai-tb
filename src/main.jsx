@@ -26,16 +26,28 @@ import VideoCall from './pages/VideoCall/VideoCall.component.jsx'
 
 import RecordTablePage from "./pages/RecordTable/RecordTablePage.component.jsx"
 import RecordsPage from "./pages/Records/RecordsPage.component.jsx"
-// import 'leaflet/dist/leaflet.css'
 
 import ViewScan from './components/ViewScan/ViewScan.component.jsx'
 import { Toaster } from 'react-hot-toast'
+import Login from './components/Login/Login.component.jsx'
+import Register from './components/Register/Register.component.jsx'
+import FillTheInfo from './components/FillTheInfo/FillTheInfo.component.jsx'
 
 const router = createHashRouter([
   {
     path: "/",
     element: <WelcomePage />,  
     loader: WelcomePageLoader,
+    children: [
+      {
+        index: true,
+        element: <Login />
+      }, 
+      {
+        path: 'signup',
+        element: <Register />
+      },
+    ]
   },
   {
     path: '/patient',
@@ -45,6 +57,10 @@ const router = createHashRouter([
       {
         index: true,
         element: <PatientPage />,
+      },
+      {
+        path: 'onboarding',
+        element: <FillTheInfo />
       },
       {
         path: 'allscans',
@@ -159,6 +175,7 @@ const router = createHashRouter([
       }, 
     ]
   },
+  {},
   {
     path: '/analytic',
     element: <MainLayout />,

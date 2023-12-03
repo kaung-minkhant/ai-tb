@@ -3,8 +3,8 @@ import Navbar from "../components/Navbar/Navbar.component"
 import "./MainLayout.style.css"
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom"
 import { selectUserId, selectUserRoleId, setUser } from "../redux/User/user.slice"
-import { useEffect, useState, useRef } from "react"
-import { getUserId, getUserRole } from "../utils"
+import { useEffect, useState, useRef, useLayoutEffect } from "react"
+import { getStorageValue, getUserId, getUserRole } from "../utils"
 import { vDotService } from "../services/vDotService"
 import {useGetDoctorMutation, useGetProfileMutation} from '../redux/Api/aiTbApi.slice.js'
 import "../services/peer.min.js"
@@ -14,8 +14,9 @@ import { useMediaQuery } from '@uidotdev/usehooks'
 export const MainLayoutLoader = () => {
   const userId = getUserId()
   const userRole = getUserRole()
+  const userFirstName = getStorageValue('firstName')
   return {
-    userId, userRole
+    userId, userRole, userFirstName
   }
 }
 
@@ -33,13 +34,19 @@ const MainLayout = () => {
   const [call, setCall] = useState(null)
   const [ownPeer, setOwnPeer] = useState(new Peer(undefined,{
     host: 'd3han8ue9ryj52.cloudfront.net',
-    // port: 8082,
     secure: true,
     path: '/peerjs/myapp',
   }))
-  const {userId, userRole} = useLoaderData()
+  const {userId, userRole, userFirstName} = useLoaderData()
   const navigate = useNavigate()
-  // console.log('user', user?.data.user)
+
+  console.log('userfirstname', userFirstName)
+  useLayoutEffect(() => {
+    if (userFirstName === 'null' && userId) {
+      navigate('onboarding')
+    }
+  }, [])
+
   useEffect(() => {
     if (!storeUserId && userId) {
       getProfile(userRole)
@@ -75,43 +82,9 @@ const MainLayout = () => {
         navigate(`/patient/call?callerId=${getUserId()}&callerRole=${getUserRole()}&recId=${targetRef.current.targetId}&recRole=${targetRef.current.targetRole}&incall=true`)
       }
       console.log('being called')
-      // navigator.mediaDevices.getUserMedia({video: true, audio: true})
-      //   .then(stream => {
-      //       call.answer(stream)
-      //   })
-      // if (isMobile) {
-      //   ownCamera.startCamera(400, 400, 'video-list', 'own-video', false, true)
-      // } else {
-      //   ownCamera.startCamera(300, 240, 'video-list', 'own-video', false)
-      // }
-      // i am here
-      // call.answer(otherCamera.getStream())
-      // call.on('stream', (stream) => {
-      //   if (isMobile) {
-      //     otherCamera.startCamera(400, 400, 'video-list', 'other-video', false, true)
-      //   } else {
-      //     otherCamera.startCamera(300, 240, 'video-list', 'other-video', false)
-      // }
-      // })
-      // navigator.mediaDevices.getUserMedia({video: true, audio: true})
-      //   .then((stream) => {
-      //     // if (confirm('accept?')) {
-      //       call.answer(stream); // Answer the call with an A/V stream.
-      //       call.on('stream', (stream) => {
-      //         const receiver = document.getElementById('receiver-video')
-      //         receiver.style.display = 'block';
-      //         receiver.srcObject = stream
-      //       });
-      //       call.on('close', () => {
-      //         navigate(-1)
-      // //       })
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.error('Failed to get local stream', err);
-      //   });
     });
   }, [])
+
   useEffect(() => {
     if (isSuccess) {
       if (+userRole === 1) {
@@ -129,27 +102,13 @@ const MainLayout = () => {
       }
     }
   }, [isSuccess, isDoctorSuccess])
-  // useEffect(() => {
-  //   if (isDoctorSuccess) {
-  //     console.log('doctor', doctor.data.doctors)
-  //   }
-  // }, [isDoctorSuccess])
+
   useEffect(() => {
     if (!userId) {
       navigate('/') 
     }
   }, [userId])
 
-  // useEffect(() => {
-  //   if (meetingId) {
-  //     if (+userRole === 1) {
-  //       navigate(`/patient/call?callerId=${getUserId()}&callerRole=${getUserRole()}&recId=${target.targetId}&recRole=${target.targetRole}`)
-  //     }
-  //   }
-  // }, [meetingId])
-
-  // useEffect(() => {
-  // }, [])
 
   return (
     <div className="main-layout">
