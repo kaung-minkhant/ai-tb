@@ -14,7 +14,7 @@ const CallLog = ({date, logs}) => {
     getPatients(logs).then(details => {
       details.forEach((detail, index) => {
         renderLogs.push(
-          <Log key={logs[index].callLogId} name={detail.data.firstName} id={detail.data.phone} icon={<UserIcon width={25}/>} />
+          <Log key={logs[index].callLogId} name={`${detail.data.firstName} ${detail.data.lastName}`} id={detail.data.phone} icon={<UserIcon width={25}/>} />
         )
       })
       setRenders(renderLogs)

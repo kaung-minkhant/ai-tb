@@ -17,7 +17,7 @@ const Contacts = () => {
       getPatients(patients.data.myPatients).then(details => {
         details.forEach(detail => {
           renderLogs.push(
-            <Log key={detail.data.userId} name={detail.data.firstName} id={detail.data.phone} icon={<UserIcon width={25}/>} onClick={() => handleClick({id: detail.data.userId, role: detail.data.roleId})} />
+            <Log key={detail.data.userId} name={`${detail.data.firstName} ${detail.data.lastName}`} id={detail.data.phone} icon={<UserIcon width={25}/>} onClick={() => handleClick({id: detail.data.userId, role: detail.data.roleId})} />
           )
         })
         setRenders(renderLogs)

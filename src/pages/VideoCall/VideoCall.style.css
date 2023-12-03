@@ -5,6 +5,10 @@
   outline: 1px dotted blue;
 }
 
+.vdots .vdots-btns {
+  z-index: 40;
+}
+
 .vdots #video-list {
   height: 400px;
   margin-top: 1rem;

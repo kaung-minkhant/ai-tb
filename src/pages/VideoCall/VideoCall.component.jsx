@@ -108,12 +108,15 @@ const VideoCall = () => {
     if (callRef.current) {
       callRef.current.close()
     }
+    if (call) {
+      call.close()
+    }
     navigate(-1)
   }
   return (
     <div className="vdots">
       <h1>VDots</h1>
-      <div>
+      <div className="vdots-btns">
         {
           !inCall && (
             <button onClick={handleStart}>Start the call</button>
