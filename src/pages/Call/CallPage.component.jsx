@@ -31,12 +31,12 @@ const CallPage = ({ width='300px'}) => {
       </div>
       <div className='call-body'>
         {
-          state === 'contact' && !(+getUserRole()===1) && (
+          state === 'contact' && (
             <Contacts />
           )
         }
         {
-          state === 'logs' && !(+getUserRole()===1) && (
+          state === 'logs' && (
             <CallLogs />
           )
         }
