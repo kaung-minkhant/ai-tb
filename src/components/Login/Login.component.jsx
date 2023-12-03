@@ -19,6 +19,7 @@ const Login = ({ styles: { loginWidth: width, fontSize }, setSignup }) => {
   const [disable, setDisable] = useState(false)
 
   const isDisabled = !Boolean(email) || !Boolean(password)
+  console.log('user', user?.data.user)
 
   useEffect(() => {
     if (user) {

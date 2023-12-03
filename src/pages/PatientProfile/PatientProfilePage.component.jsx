@@ -36,7 +36,7 @@ const PatientProfilePage = () => {
 
   return (
     <div className='patient-profile'>
-      <ProfileProfile name={ state.userId ? `${state.firstName} ${state.lastName}` : username} imagePath='./images/patient_profile.png' />
+      <ProfileProfile name={ state?.userId ? `${state.firstName} ${state.lastName}` : username} imagePath='./images/patient_profile.png' />
       
       <div className="grids-container">
         <div className="left-grid">
