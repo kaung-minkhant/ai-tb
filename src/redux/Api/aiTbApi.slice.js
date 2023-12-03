@@ -4,7 +4,7 @@ import { getUserAccessToken } from "../../utils";
 export const aiTbApiSlice = createApi({
   reducerPath: 'ai_tb',
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_URL }),
-  tagTypes: ['medTrackers', 'profile'],
+  tagTypes: ['medTrackers', 'profile', 'scans'],
   endpoints: builder => ({
     getPing: builder.query({
       query: () => '/'
@@ -126,6 +126,16 @@ export const aiTbApiSlice = createApi({
       }),
       invalidatesTags: ['medTrackers']
     }),
+    getScans: builder.query({
+      query: (id) => ({
+        url: `/users/${id}/ai`,
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      }),
+      providesTags: ['scans']
+    }),
     uploadXray: builder.mutation({
       query: ({ dataURL }) => {
         return {
@@ -138,7 +148,8 @@ export const aiTbApiSlice = createApi({
             authorization: `Bearer ${getUserAccessToken()}`,
           }
         }
-      }
+      },
+      invalidatesTags: ['scans']
     }),
     getClinics: builder.mutation({
       query: ({country, city}) => ({
@@ -188,5 +199,5 @@ export const { useGetPingQuery, useLoginMutation, useSignupMutation,
   useTakeMedicationMutation,
   useGetMedicationQuery, useGetClinicsMutation, useGetCountriesQuery, useGetRecordsQuery, useGetOneRecordQuery,
   useGetProfileMutation, useGetDoctorMutation, useGetAllDataQuery, useCreateCallLogMutation,
-  useUpdateProfileMutation
+  useUpdateProfileMutation, useGetScansQuery
 } = aiTbApiSlice
