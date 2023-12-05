@@ -1,0 +1,28 @@
+.f-orm{
+    padding: 100px;
+}
+
+.in-put{
+    padding: 20px;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid black;
+    border-radius: 1rem;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: 2px solid black;
+    border-radius: 1rem;
+}
