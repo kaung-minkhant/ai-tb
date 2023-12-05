@@ -11,6 +11,7 @@ import AnalyticPage from './pages/Analytic/Analytic.component.jsx'
 
 import MapPage from "./pages/Map/MapPage.component.jsx";
 import DashboardPage from "./pages/Dashboard/DashboardPage.component.jsx";
+import AddPatientPage from "./pages/AddPatient/AddPatient.component.jsx";
 
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
@@ -173,6 +174,14 @@ const router = createHashRouter([
         path: 'scan/view-scan',
         element: <ViewScan />
       }, 
+      {
+        path: 'add-patient',
+        element: <AddPatientPage />
+      }, 
+      {
+        path: 'dashboard',
+        element: <DashboardPage/>
+      }
     ]
   },
   {},
