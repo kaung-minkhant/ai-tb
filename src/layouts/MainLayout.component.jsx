@@ -34,7 +34,17 @@ const MainLayout = () => {
   const [call, setCall] = useState(null)
   const [ownPeer, setOwnPeer] = useState(new Peer(undefined,{
     host: 'd3han8ue9ryj52.cloudfront.net',
+    debug: 3,
     secure: true,
+    config: {
+      'iceServers': [
+        {
+          url: 'turn:13.229.97.90:8080',
+          credential: 'credentials',
+          username: 'password'
+        }
+      ]
+    },
     path: '/peerjs/myapp',
   }))
   const {userId, userRole, userFirstName} = useLoaderData()
