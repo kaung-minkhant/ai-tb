@@ -4,47 +4,79 @@ export default class Camera {
   video = null
   context = null
   canvas = null
+  ownStream = null
+  injectedStream = null
+  
+  getStream = () => {
+    return this.ownStream
+  }
+  
+  setStream = (stream) => {
+    this.injectedStream = stream
+  }
 
-  createObjects = function (width, height, id, mobile) {
+  createObjects = function (width, height, id, vidId, aiScan, mobile) {
     const container = document.getElementById(id)
     const video = document.createElement('video');
-    video.id = 'video';
+    video.id = vidId;
     video.width = width;
     video.height = height;
     video.autoplay = true;
     if (mobile) {
-      video.style.transform = 'scaleY(1)';
+      if (aiScan) {
+        video.style.transform = 'rotateY(180deg) scaleX(-1)'
+      } else {
+        video.style.transform = 'rotateY(180deg) scale(1.5)'
+      }
+      // video.style.transform = `${aiScan ? 'rotateY(180deg)' : ""} scale(${aiScan ? 1 : 2})`;
     } else {
       video.style.transform = 'rotateY(180deg)';
     }
     container.appendChild(video);
-
-    const canvas = document.createElement('canvas');
-    canvas.id = 'canvas';
-    canvas.width = width;
-    canvas.height = height;
-    canvas.style.transform = 'rotateY(180deg)';
-    canvas.style.display = 'none';
-    container.appendChild(canvas);
+    if (aiScan) {
+      const canvas = document.createElement('canvas');
+      canvas.id = 'canvas';
+      canvas.width = width;
+      canvas.height = height;
+      canvas.style.transform = 'rotateY(180deg)';
+      canvas.style.display = 'none';
+      container.appendChild(canvas);
+    }
+    
   }
 
-  startCamera = (w=680, h=480, id='video-container', isMobile=false) => {
+  startCamera = (w=680, h=480, containerId='video-container', videoId = 'video-id', call = null, aiScan = true, isMobile=false) => {
     this.width = w
     this.height = h
     if ( navigator.mediaDevices.getUserMedia) {
-      this.createObjects(w, h, id, isMobile);
-      this.video = document.getElementById('video');
+      this.createObjects(w, h, containerId, videoId, aiScan, isMobile);
+      this.video = document.getElementById(videoId);
+      console.log(this.video)
       this.video.autoplay = true
-      this.canvas = document.getElementById('canvas');
-      this.context = this.canvas.getContext('2d');
-      (function (video) {
+      if (aiScan) {
+        this.canvas = document.getElementById('canvas');
+        this.context = this.canvas.getContext('2d');
+      }
+      
+      
+      if (this.injectedStream) {
+        this.video.srcObject = this.injectedStream
+        return
+      }
+      
+      const start = (video) => {
         navigator.mediaDevices.getUserMedia({video: {
-          facingMode: 'environment',
-        }}).then(function (stream) {
-            video.srcObject = stream;
+          facingMode: {exact: aiScan ? (isMobile ? "environment" : 'user') : "user"},
+        }}).then((stream) => {
+            this.ownStream = stream
+            video.srcObject = this.ownStream;
+            if(call) {
+              call.answer(stream)
+            }
             // video.play();
         });
-      })(this.video)
+      }
+      start(this.video)
     }
   }
 

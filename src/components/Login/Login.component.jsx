@@ -2,23 +2,27 @@ import './Login.style.css'
 import CustomInput from '../CustomInput/CustomInput.component'
 import CustomButton from '../CustomButton/CustomButton.component'
 import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-import { checkEmail, checkPassword, getUser, setUserAccessToken, setUserID, setUserRole } from '../../utils'
-import { useNavigate } from 'react-router-dom'
+import { checkEmail, checkPassword, getUser, setStorageValue, setUserAccessToken, setUserID, setUserRole } from '../../utils'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useLoginMutation } from '../../redux/Api/aiTbApi.slice'
 import { setUser } from '../../redux/User/user.slice'
 import { useDispatch } from 'react-redux'
 import toast from 'react-hot-toast'
 
-const Login = ({ styles: { loginWidth: width, fontSize }, setSignup }) => {
+const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [styles] = useOutletContext()
   const [login, { data: user, isLoading, isSuccess }] = useLoginMutation()
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
   const [disable, setDisable] = useState(false)
 
+  const {loginWidth: width, fontSize} = styles
+
   const isDisabled = !Boolean(email) || !Boolean(password)
+  console.log('user', user?.data.user)
 
   useEffect(() => {
     if (user) {
@@ -28,6 +32,7 @@ const Login = ({ styles: { loginWidth: width, fontSize }, setSignup }) => {
       dispatch(setUser(userObj))
       setUserID(userObj.userId)
       setUserRole(userObj.roleId)
+      setStorageValue('firstName',userObj.firstName)
     }
   }, [isSuccess])
 
@@ -49,7 +54,7 @@ const Login = ({ styles: { loginWidth: width, fontSize }, setSignup }) => {
   }
 
   const handleSignUp = () => {
-    setSignup(true)
+    navigate('signup') 
   }
 
   if (isLoading) {

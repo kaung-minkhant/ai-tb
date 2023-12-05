@@ -2,8 +2,8 @@ import './WelcomePage.style.css'
 import Login from "../../components/Login/Login.component"
 import { useEffect, useState } from 'react';
 import { getUserId, getUserRole, getWindowSize } from '../../utils';
-import { useLoaderData, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Outlet, useLoaderData, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUserId, selectUserRoleId } from '../../redux/User/user.slice';
 import Register from '../../components/Register/Register.component';
 
@@ -61,13 +61,7 @@ const WelcomePage = () => {
         <img src="./images/welcome_image.png" /> 
       </div>
       <div className='login-logout'>
-        {
-          signup ? (
-            <Register styles={styles} setSignUp={setSignUp}/>
-          ) : (
-            <Login styles={styles} setSignup={setSignUp}/>
-          )
-        }
+        <Outlet context={[styles]} />
       </div>
     </div>
   )

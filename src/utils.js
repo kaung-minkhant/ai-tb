@@ -84,3 +84,19 @@ export const getWidth = (width) => {
   const scale = window.devicePixelRatio;
   return Math.floor(width*scale)
 }
+
+export const setStorageValue = (key, value) => {
+  if (typeof Storage !== 'undefined') {
+    localStorage.setItem(key, value)
+  }
+}
+export const getStorageValue = (key) => {
+  if (typeof Storage !== 'undefined') {
+    return localStorage.getItem(key)
+  }
+}
+export const removeStorageValue = (key) => {
+  if (typeof Storage !== 'undefined') {
+    localStorage.removeItem(key)
+  }
+}

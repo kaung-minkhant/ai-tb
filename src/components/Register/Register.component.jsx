@@ -6,10 +6,12 @@ import { checkEmail, checkPassword, checkMatchPassword} from '../../utils'
 import { useEffect, useState } from 'react'
 import { useSignupMutation } from '../../redux/Api/aiTbApi.slice'
 import { useDispatch } from 'react-redux'
-import { setUser } from '../../redux/User/user.slice'
+import { useNavigate, useOutletContext } from 'react-router'
+import toast from 'react-hot-toast'
 
-const Register = ({styles: {loginWidth:width, fontSize}, setSignUp}) => {
-  const dispatch = useDispatch()
+const Register = () => {
+  const navigate = useNavigate()
+  const [styles] = useOutletContext()
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
@@ -17,29 +19,52 @@ const Register = ({styles: {loginWidth:width, fontSize}, setSignUp}) => {
   const [signup, {data: user, isLoading, isSuccess}] = useSignupMutation()
   const checkPasswordMatch = checkMatchPassword(password)
 
-  const isDisabled = disable || !Boolean(email) || !Boolean(password) || !Boolean(confirmPassword)
+  const {loginWidth: width, fontSize} = styles
+
+  const isDisabled = !Boolean(email) || !Boolean(password) || !Boolean(confirmPassword)
 
   const handleSignup = () => {
-    signup({email, password}) 
+    if (!checkEmail(email)) {
+      toast.error("Invalid Email", {
+        duration: 2000
+      })
+    }
+    if (!checkPassword(password)) {
+      toast.error("Password needs to have at least 8 characters", {
+        duration: 2000
+      })
+    }
+    if (!checkPasswordMatch(confirmPassword)) {
+      toast.error("Passwords do not match", {
+        duration: 2000
+      })
+    }
+    if (checkEmail(email) && checkPassword(password) && checkPasswordMatch(confirmPassword)) {
+      signup({email, password}) 
+    }
   }
 
   useEffect(() => {
     if (user) {
       const userObj = user.data.user
-      dispatch(setUser(userObj))
+      navigate('/')
+      // navigate('/onboarding', {state: {
+      //   id: userObj.userId,
+      //   state: 'signup'
+      // }})
     } 
   }, [isSuccess])
 
   return (
     <div className='register-wrapper'>
       <div className='register-inputs'>
-        <CustomInput saveValue={setEmail} setDisable={setDisable} type='text' width={width} fontSize={fontSize} icon={<EnvelopeIcon />} label={"Email Address"} validator={checkEmail} invalidMessage={"Invalid Email"}/>
-        <CustomInput saveValue={setPassword} setDisable={setDisable} type='password' width={width} fontSize={fontSize} icon={<LockClosedIcon />} label={"Password"} validator={checkPassword} invalidMessage={"Password must be at least 8 characters"}/>
-        <CustomInput saveValue={setConfirmPassword} setDisable={setDisable} type='password' width={width} fontSize={fontSize} icon={<LockClosedIcon />} label={"Repeat Password"} validator={checkPasswordMatch} invalidMessage={"Passwords do not match"}/>
+        <CustomInput autoComplete={false} saveValue={setEmail} setDisable={setDisable} type='text' width={width} fontSize={fontSize} icon={<EnvelopeIcon />} label={"Email Address"} validator={checkEmail} invalidMessage={"Invalid Email"}/>
+        <CustomInput autoComplete={false} saveValue={setPassword} setDisable={setDisable} type='password' width={width} fontSize={fontSize} icon={<LockClosedIcon />} label={"Password"} validator={checkPassword} invalidMessage={"Password must be at least 8 characters"}/>
+        <CustomInput autoComplete={false} saveValue={setConfirmPassword} setDisable={setDisable} type='password' width={width} fontSize={fontSize} icon={<LockClosedIcon />} label={"Repeat Password"} validator={checkPasswordMatch} invalidMessage={"Passwords do not match"}/>
       </div>
       <div className='register-buttons'>
         <CustomButton handleClick={handleSignup} label={'Sign up now'} fontSize={fontSize} color={"blue"} textColor="white" disabled={isDisabled}/>
-        <span>Already have an account? <span onClick={() => setSignUp(false)} style={{
+        <span>Already have an account? <span onClick={() => navigate('/')} style={{
           textDecoration: 'underline',
           cursor: 'pointer',
         }}>Log in</span></span>

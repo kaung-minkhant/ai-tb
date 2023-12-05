@@ -16,9 +16,9 @@ const AiScan = () => {
   const navigate = useNavigate()
   useEffect(() => {
     if (isMobile) {
-      camera.startCamera(300, 400, 'video-element', true)
+      camera.startCamera(300, 400, 'video-element', 'ai-scan-camera', null, true, true)
     } else {
-      camera.startCamera(300, 240, 'video-element')
+      camera.startCamera(300, 240, 'video-element', 'ai-scan-camera', null, true)
     }
   }, [])
 
