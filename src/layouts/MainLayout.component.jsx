@@ -37,13 +37,31 @@ const MainLayout = () => {
     debug: 3,
     secure: true,
     config: {
-      'iceServers': [
-        {
-          url: 'turn:13.229.97.90:8080',
-          credential: 'credentials',
-          username: 'password'
-        }
-      ]
+      'iceServers':[
+      {
+          "urls": "stun:stun.relay.metered.ca:80"
+      },
+      {
+          "urls": "turn:a.relay.metered.ca:80",
+          "username": "218cb7542b634fc7728743aa",
+          "credential": "U1iQqCevxEFg0MWD"
+      },
+      {
+          "urls": "turn:a.relay.metered.ca:80?transport=tcp",
+          "username": "218cb7542b634fc7728743aa",
+          "credential": "U1iQqCevxEFg0MWD"
+      },
+      {
+          "urls": "turn:a.relay.metered.ca:443",
+          "username": "218cb7542b634fc7728743aa",
+          "credential": "U1iQqCevxEFg0MWD"
+      },
+      {
+          "urls": "turn:a.relay.metered.ca:443?transport=tcp",
+          "username": "218cb7542b634fc7728743aa",
+          "credential": "U1iQqCevxEFg0MWD"
+      }
+    ]
     },
     path: '/peerjs/myapp',
   }))
@@ -76,6 +94,7 @@ const MainLayout = () => {
     ownPeer.on('connection', (conn) => {
       console.log('incoming peer connection!');
       conn.on('data', (data) => {
+        console.log('data', data)
         setTarget(JSON.parse(data))
         targetRef.current = JSON.parse(data)
         console.log(`received: ${data}`);
