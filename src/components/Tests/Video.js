@@ -67,7 +67,7 @@ export default class Camera {
       const start = (video) => {
         navigator.mediaDevices.getUserMedia({video: {
           facingMode: {exact: aiScan ? (isMobile ? "environment" : 'user') : "user"},
-        }}).then((stream) => {
+        }, audio: true}).then((stream) => {
             this.ownStream = stream
             video.srcObject = this.ownStream;
             if(call) {
