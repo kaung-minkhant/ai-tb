@@ -37,15 +37,15 @@ const MainLayout = () => {
     debug: 3,
     secure: true,
     path: '/peerjs/myapp',
-    config: {
-      'iceServers': [
-        {
-          url: 'turn:d1itmmsc3m4ml8.cloudfront.net',
-          credential: 'credentials',
-          username: 'password'
-        }
-      ]
-    }
+    // config: {
+    //   'iceServers': [
+    //     {
+    //       url: 'turn:d1itmmsc3m4ml8.cloudfront.net',
+    //       credential: 'credentials',
+    //       username: 'password'
+    //     }
+    //   ]
+    // }
   }))
   const {userId, userRole, userFirstName} = useLoaderData()
   const navigate = useNavigate()
