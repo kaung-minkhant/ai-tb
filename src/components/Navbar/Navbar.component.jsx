@@ -33,6 +33,7 @@ const Navbar = ({userRole}) => {
     Appointments: '/doctor/appointments',
     Calls: '/doctor/calls',
     'AI Scan': '/doctor/ai-scan',
+    'Add Patient': '/doctor/add-patient'
   }
 
   let navItems;

@@ -24,6 +24,8 @@ import AiScanPage from './pages/AiScan/AiScanPage.component.jsx'
 import AiScan from './components/AiScan/AiScan.component.jsx'
 import VideoCall from './pages/VideoCall/VideoCall.component.jsx'
 
+import AddPatientPage from './pages/AddPatient/AddPatient.component.jsx'
+
 import RecordTablePage from "./pages/RecordTable/RecordTablePage.component.jsx"
 import RecordsPage from "./pages/Records/RecordsPage.component.jsx"
 
@@ -172,6 +174,10 @@ const router = createHashRouter([
       {
         path: 'scan/view-scan',
         element: <ViewScan />
+      }, 
+      {
+        path: 'add-patient',
+        element: <AddPatientPage />
       }, 
     ]
   },
