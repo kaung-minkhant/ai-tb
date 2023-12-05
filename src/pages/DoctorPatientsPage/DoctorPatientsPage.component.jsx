@@ -37,6 +37,9 @@ const DoctorPatientsPage = () => {
   const getPatients = async (patients) => {
     const patientDetails = []
     for (const patient of patients) {
+      if (!patient || !patient.patientId){
+        continue 
+      }
       const response = await axios.get(import.meta.env.VITE_URL + '/users/' + patient.patientId, {
         headers: {
           authorization: `Bearer ${getUserAccessToken()}`

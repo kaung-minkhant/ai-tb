@@ -33,9 +33,36 @@ const MainLayout = () => {
   const [ownCamera, setOwnCamera] = useState(new Camera())
   const [call, setCall] = useState(null)
   const [ownPeer, setOwnPeer] = useState(new Peer(undefined,{
-    host: 'd4hroxt5b51e.cloudfront.net',
+    host: 'd3han8ue9ryj52.cloudfront.net',
     debug: 3,
     secure: true,
+    config: {
+      'iceServers':[
+      {
+          "urls": "stun:stun.relay.metered.ca:80"
+      },
+      {
+          "urls": "turn:a.relay.metered.ca:80",
+          "username": "218cb7542b634fc7728743aa",
+          "credential": "U1iQqCevxEFg0MWD"
+      },
+      {
+          "urls": "turn:a.relay.metered.ca:80?transport=tcp",
+          "username": "218cb7542b634fc7728743aa",
+          "credential": "U1iQqCevxEFg0MWD"
+      },
+      {
+          "urls": "turn:a.relay.metered.ca:443",
+          "username": "218cb7542b634fc7728743aa",
+          "credential": "U1iQqCevxEFg0MWD"
+      },
+      {
+          "urls": "turn:a.relay.metered.ca:443?transport=tcp",
+          "username": "218cb7542b634fc7728743aa",
+          "credential": "U1iQqCevxEFg0MWD"
+      }
+    ]
+    },
     path: '/peerjs/myapp',
     // config: {
     //   'iceServers': [
@@ -76,6 +103,7 @@ const MainLayout = () => {
     ownPeer.on('connection', (conn) => {
       console.log('incoming peer connection!');
       conn.on('data', (data) => {
+        console.log('data', data)
         setTarget(JSON.parse(data))
         targetRef.current = JSON.parse(data)
         console.log(`received: ${data}`);
