@@ -200,6 +200,16 @@ export const aiTbApiSlice = createApi({
         }
       })
     }),
+    addUserRecord: builder.mutation({
+      query: ({userId, body}) => ({
+        url: "/users/"+userId+"/records",
+        method: 'POST',
+        body: body,
+        headers: {
+          authorization: `Bearer ${getUserAccessToken()}`
+        }
+      })
+    }),
   }),
 })
 
@@ -208,5 +218,5 @@ export const { useGetPingQuery, useLoginMutation, useSignupMutation,
   useTakeMedicationMutation,
   useGetMedicationQuery, useGetClinicsMutation, useGetCountriesQuery, useGetRecordsQuery, useGetOneRecordQuery,
   useGetProfileMutation, useGetDoctorMutation, useGetAllDataQuery, useCreateCallLogMutation,
-  useUpdateProfileMutation, useGetScansQuery, useAddUserToMyProfileMutation
+  useUpdateProfileMutation, useGetScansQuery, useAddUserToMyProfileMutation, useAddUserRecordMutation
 } = aiTbApiSlice

@@ -8,10 +8,11 @@ import ProfileProfile from '../../components/HelperComponents/ProfileProfile.com
 import { getUserRole, getWidth } from '../../utils.js'
 import Medications from '../../components/Medications/Medications.component.jsx'
 import { useLocation, useParams } from 'react-router-dom'
-import { useCreateMedicationMutation, useGetMedicationQuery } from '../../redux/Api/aiTbApi.slice.js'
+import { useCreateMedicationMutation, useGetMedicationQuery, useAddUserRecordMutation } from '../../redux/Api/aiTbApi.slice.js'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser, selectUserName } from '../../redux/User/user.slice.js'
+import Popup from 'reactjs-popup'
 
 const PatientProfilePage = () => {
   const isMobile = useMediaQuery("only screen and (max-width : 650px)")
@@ -22,6 +23,16 @@ const PatientProfilePage = () => {
   const {patientId} = useParams()
   const isDoctor = window.location.href.includes('doctor')
   const [createMedication, {isSuccess: isMedicationMutationSuccess}] = useCreateMedicationMutation()
+ 
+   const [addRecord, {data: rData, isLoading: rIsLoading, isSuccess: rIsSuccess}] = useAddUserRecordMutation();
+const [recData, setRecData] = useState({
+    recordDate: "",
+    type: "",
+    tests: [
+      
+    ]
+  })
+ 
   const {data: medication, isLoading, isSuccess: isMedicationQuerySuccess} = useGetMedicationQuery({
     isDoctor: isDoctor,
     patientId: patientId
@@ -68,6 +79,151 @@ const PatientProfilePage = () => {
               )
             } */}
           </div>
+          
+          {
+            isDoctor && 
+            <Popup trigger={
+              <div className='record-add'>Add Record</div>
+            } modal>
+              {
+                close => (
+                  // <h1 onClick={close}>hee</h1>
+                  <div className='white-card'>
+                    <label>
+                      Record Date: <input type='date' 
+                        value={recData.startDate} 
+                        onChange={e => setRecData({
+                          ...recData,
+                          recordDate: e.target.value
+                        })}></input>
+                    </label>
+                    <label>
+                      Record Type: <input type='text' 
+                        value={recData.type} 
+                        onChange={e => setRecData({
+                          ...recData,
+                          type: e.target.value
+                        })}></input>
+                    </label>
+                    <div id='tests'>
+                     
+                     {
+                      recData.tests.map((test,index)=>(
+                        <div className="form-test">
+                          <label>
+                            Name: <input type='text' 
+                              value={recData.tests[index].name} 
+                              onChange={e => {
+                                let arr = recData.tests
+                                arr[index].name = e.target.value
+                                setRecData({
+                                  ...recData,
+                                  tests: arr
+                                })
+                              }}></input>
+                          </label>
+                          <label>
+                            Value: <input type='text' 
+                              value={recData.tests[index].value} 
+                              onChange={e => {
+                                let arr = recData.tests
+                                arr[index].value = e.target.value
+                                setRecData({
+                                  ...recData,
+                                  tests: arr
+                                })
+                              }}></input>
+                          </label>
+                          <label>
+                            Unit: <input type='text' 
+                              value={recData.tests[index].unit} 
+                              onChange={e => {
+                                let arr = recData.tests
+                                arr[index].unit = e.target.value
+                                setRecData({
+                                  ...recData,
+                                  tests: arr
+                                })
+                              }}></input>
+                          </label>
+                          <label>
+                            lowRange: <input type='text' 
+                              value={recData.tests[index].lowRange} 
+                              onChange={e => {
+                                let arr = recData.tests
+                                // console.log("dfsdfsdfsd")
+                                // console.log(arr)
+                                arr[index].lowRange = e.target.value
+                                setRecData({
+                                  ...recData,
+                                  tests: arr
+                                })
+                              }}></input>
+                          </label>
+                          <label>
+                            highRange: <input type='text' 
+                              value={recData.tests[index].highRange} 
+                              onChange={e => {
+                                let arr = recData.tests
+                                // console.log("dfsdfsdfsd")
+                                // console.log(arr)
+                                arr[index].highRange = e.target.value
+                                setRecData({
+                                  ...recData,
+                                  tests: arr
+                                })
+                              }}></input>
+                          </label>
+                          <button onClick={()=>{
+                            let arr = recData.tests
+                            // console.log("dfsdfsdfsd")
+                            // console.log(arr)
+                            arr.splice(index,1)
+                            setRecData({
+                              ...recData,
+                              tests: arr
+                            })
+                          }}>REMOVE</button>
+                        </div>
+                      ))
+                     }
+
+                    </div>
+
+                    
+
+                    <button onClick={()=>{
+                      let arr = recData.tests
+                      arr.push({
+                          name:"",
+                          value: "",
+                          unit: "",
+                          lowRange: "",
+                          highRange: ""
+                      })
+                      
+                      setRecData({
+                        ...recData,
+                        tests: arr
+                      })
+                    }}>ADD TEST</button>
+                    <button onClick={
+                      ()=>{
+                        console.log("dhf", patientId)
+                        addRecord({userId: patientId, body:recData})
+                        close()
+                      }
+
+                    }>SAVE</button>
+                    <button onClick={close}>CLOSE</button>
+                  </div>
+                )
+              }
+
+            </Popup>
+          }
+          
+          
         </div>
         <div className="right-grid">
 
