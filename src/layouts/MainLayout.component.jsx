@@ -33,9 +33,19 @@ const MainLayout = () => {
   const [ownCamera, setOwnCamera] = useState(new Camera())
   const [call, setCall] = useState(null)
   const [ownPeer, setOwnPeer] = useState(new Peer(undefined,{
-    host: 'd3han8ue9ryj52.cloudfront.net',
+    host: 'd4hroxt5b51e.cloudfront.net',
+    debug: 3,
     secure: true,
     path: '/peerjs/myapp',
+    config: {
+      'iceServers': [
+        {
+          url: 'turn:d1itmmsc3m4ml8.cloudfront.net',
+          credential: 'credentials',
+          username: 'password'
+        }
+      ]
+    }
   }))
   const {userId, userRole, userFirstName} = useLoaderData()
   const navigate = useNavigate()
