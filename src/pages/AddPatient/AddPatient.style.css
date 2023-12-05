@@ -1,21 +1,31 @@
 .f-orm{
     padding: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.f-orm label {
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 20px
 }
 
 .in-put{
     padding: 20px;
 }
 
-input[type=text] {
-  width: 100%;
+.in-put{
+  
+  width: auto;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 8px 10px;
   box-sizing: border-box;
   border: 2px solid black;
-    border-radius: 1rem;
+  border-radius: 1rem;
 }
 
-input[type=button], input[type=submit], input[type=reset] {
+.f-orm input[type=button], input[type=submit], input[type=reset] {
   background-color: #04AA6D;
   border: none;
   color: white;
