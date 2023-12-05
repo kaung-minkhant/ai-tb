@@ -19,6 +19,7 @@ const VideoCall = () => {
   const [createCallLog, {data: log, isSuccess, isLoading}] = useCreateCallLogMutation()
   // const [meetingService, setMeetingService] = useState(new MeetingService())
   const [targetPeerId, setTargetPeerId] = useState(null)
+  const [conn, setConn] = useState(null)
   const [ownCamera, setOwnCamera] = useState(new Camera)
   const [otherCamera, setOtherCamera] = useState(new Camera)
 
@@ -69,6 +70,21 @@ const VideoCall = () => {
     }
     
   }, [])
+
+  useEffect(() => {
+    if (targetPeerId) {
+      const connn = ownPeer.connect(targetPeerId)
+      connn.on('open',  () => {
+        conn.send(JSON.stringify({
+          targetId: recId,
+          targetRole: recRole,
+          inCall: inCall
+        }));
+    });
+      setConn(connn)
+    }
+  }, [targetPeerId])
+
   console.log({callerId, callerRole, recId, recRole})
 
   let renderVideo = (element, stream) => {
@@ -77,19 +93,8 @@ const VideoCall = () => {
 
   const handleStart = async () => {
     console.log('calling')
-    const conn = ownPeer.connect(targetPeerId)
-    // conn.on('data', (data) => {
-    //   console.log(`received: ${data}`);
-    // });
     const role = +getUserRole()
     createCallLog({doctorId: role === 2 ? callerId : recId, patientId: role === 2 ? recId : callerId}) 
-    conn.on('open',  () => {
-      conn.send(JSON.stringify({
-        targetId: recId,
-        targetRole: recRole,
-        inCall: inCall
-      }));
-    });
     await new Promise(resolve => {
       setTimeout(() => resolve(), 1000)
     })
