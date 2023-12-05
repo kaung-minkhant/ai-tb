@@ -75,7 +75,7 @@ const VideoCall = () => {
     if (targetPeerId) {
       const connn = ownPeer.connect(targetPeerId)
       connn.on('open',  () => {
-        conn.send(JSON.stringify({
+        connn.send(JSON.stringify({
           targetId: recId,
           targetRole: recRole,
           inCall: inCall
