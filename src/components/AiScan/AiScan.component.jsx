@@ -60,14 +60,16 @@ const AiScan = () => {
           </div>
         )
       }
-      <div className='scan-warning-text'>Please ensure your CXR image is inside the Green Boundary</div>
-      <div className='take-scan' onClick={handleSave}>
-        <CameraIcon width={40} />
+      <div className='controls'>
+        <div className='scan-warning-text'>Please ensure your CXR image is inside the Green Boundary</div>
+        <div className='take-scan' onClick={handleSave}>
+          <CameraIcon width={40} />
+        </div>
+        <label htmlFor='upload-file' className='scan-upload'>
+          <ArrowUpTrayIcon width={20} /> 
+          Upload from Device Storage</label>
+        <input id='upload-file' type='file' accept='.png,.jpg' onChange={onImageChange} />
       </div>
-      <label htmlFor='upload-file' className='scan-upload'>
-        <ArrowUpTrayIcon width={20} /> 
-        Upload from Device Storage</label>
-      <input id='upload-file' type='file' accept='.png,.jpg' onChange={onImageChange} />
     </div>
   )
 }

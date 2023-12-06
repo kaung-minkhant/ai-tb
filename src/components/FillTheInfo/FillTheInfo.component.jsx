@@ -71,9 +71,11 @@ const FillTheInfo = () => {
     const countryObj = JSON.parse(e.target.value)
     const country = countryObj.name
     const code = countryObj.code
-    setCountry(country)
+    setCountry(e.target.value)
     dispatch(fetchCities({code: code})) 
   }
+  
+  console.log('country', country)
 
   return (
     <div className='onboarding-wrapper'>

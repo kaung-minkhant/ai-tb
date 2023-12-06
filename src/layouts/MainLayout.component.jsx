@@ -10,6 +10,7 @@ import {useGetDoctorMutation, useGetProfileMutation} from '../redux/Api/aiTbApi.
 import "../services/peer.min.js"
 import Camera from '../components/Tests/Video.js'
 import { useMediaQuery } from '@uidotdev/usehooks'
+import { useLocation } from 'react-router-dom'
 
 export const MainLayoutLoader = () => {
   const userId = getUserId()
@@ -32,6 +33,7 @@ const MainLayout = () => {
   const targetRef = useRef(null)
   const [ownCamera, setOwnCamera] = useState(new Camera())
   const [call, setCall] = useState(null)
+  const [onboarding, setOnboarding] = useState(false)
   const [ownPeer, setOwnPeer] = useState(new Peer(undefined,{
     host: 'd3han8ue9ryj52.cloudfront.net',
     debug: 3,
@@ -76,6 +78,7 @@ const MainLayout = () => {
   }))
   const {userId, userRole, userFirstName} = useLoaderData()
   const navigate = useNavigate()
+  const location = useLocation()
 
   console.log('userfirstname', userFirstName)
   useLayoutEffect(() => {
@@ -83,6 +86,15 @@ const MainLayout = () => {
       navigate('onboarding')
     }
   }, [])
+  console.log(location)
+
+  useLayoutEffect(() => {
+    if (userFirstName === 'null' && userId) {
+      if (!location.pathname.includes('onboarding')) {
+        navigate('onboarding')
+      }
+    }
+  }, [location])
 
   useEffect(() => {
     if (!storeUserId && userId) {

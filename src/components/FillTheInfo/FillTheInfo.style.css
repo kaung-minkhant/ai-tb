@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.onboarding-wrapper h2 {
+  text-align: center;
+}
+
 .onboarding-wrapper .onboarding-inputs {
   display: flex;
   flex-direction: column;
@@ -30,4 +34,11 @@
 
 .onboarding-wrapper label select {
   width: 50%;
+}
+
+
+@media (max-width: 650px) {
+  .onboarding-wrapper .onboarding-inputs {
+    width: 90%;
+  }
 }
